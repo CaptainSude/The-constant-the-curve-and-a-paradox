@@ -1,0 +1,279 @@
+\section{Proofs behind the constant and the curve}\label{app:foundations}
+
+The main text keeps the elementary digit arguments beside their conclusions. This appendix supplies the longer operator and density arguments.
+
+\subsection{The finite part of the heat trace}\label{app:fnd:heat-binary}
+
+\begin{proof}[Proof of Proposition~\ref{fnd:heat-binary}]
+Summing a Dirichlet series on one least-prime lane gives
+\begin{align*}
+ \sum_{\ell(n)=j}n^{-s}
+ &=p_j^{-s}\zeta(s)\prod_{r<j}(1-p_r^{-s}),\\
+ \sum_{\ell(n)=j}\lambda(n)n^{-s}
+ &=-p_j^{-s}\frac{\zeta(2s)}{\zeta(s)}
+     \prod_{r<j}(1+p_r^{-s}).
+\end{align*}
+Initially for $\Re s>1$, convolution with the constant-one
+function therefore gives
+\begin{equation}
+ Z_{\Gold}(s):=\sum_{m\ge1}c_mm^{-s}
+ =\zeta(2s)(1+C(s))+\zeta(s)^2A(s).
+ \label{fnd:spectral-zeta}
+\end{equation}
+This identity supplies meromorphic continuation.  Mellin inversion
+of the exponential, followed by a contour shift from $\Re s>1$
+to $\Re s=-1/2$, gives
+\[
+ \Theta_{\Gold}(t)=1+\frac2{2\pi i}\int
+ \Gamma(s)Z_{\Gold}(s)(\pi t)^{-s}\,ds
+\]
+with residues at $1,1/2,0$.  The finite Dirichlet polynomials are
+bounded on each vertical line, zeta has polynomial growth there,
+and gamma decays exponentially.  The shifted integral is therefore
+$O_F(\sqrt t)$; these are the standard Mellin contour estimates
+in \cite[Section 2.5]{fndDLMF}.
+
+At $s=1$, the double pole of $\zeta(s)^2A(s)$, together with
+$\Gamma'(1)=-\gamma$, gives the first line of
+\eqref{fnd:heat-binary-expansion}.  The residue of $\zeta(2s)$
+at $1/2$ gives its second divergent term.  Finally $C(0)=B$,
+$A(0)=0$ because the lane of $2$ is enabled, and
+$\zeta(0)=-1/2$.  Hence $Z_{\Gold}(0)=-(1+B)/2$.
+The residue at zero and the separate zero-energy state combine
+to give $1+2Z_{\Gold}(0)=-B$.
+\end{proof}
+
+\subsection{A positive operator for the message}\label{app:fnd:mask-operator}
+
+Let $\mathcal F=\{p_j:g_j=0\}$ and $D=z\,d/dz$.
+For a prime cutoff $R$, start with $U=1$ and apply successively
+\begin{equation}
+ U\longleftarrow(D+p-1+\mathbf1_{\{p\in\mathcal F\}}z)U,
+ \qquad p\le R.
+ \label{fnd:prime-operator}
+\end{equation}
+Call the result $U_R$.  For the mask in which only
+$\mathcal F\cap[2,R]$ is disabled, denote the first function in
+\eqref{fnd:two-functions} by $\Phi_{g,R}$.  Then
+\begin{equation}
+ [z^k]\Phi_{g,R}(z)=
+ \frac{[z^k]U_R(z)}{\prod_{p\le R}(p+k-1)}.
+ \label{fnd:operator-coefficients}
+\end{equation}
+Indeed, let $v_j$ be the probability that exactly $j$ coordinates
+have received a first label, all such labels were disabled, and no
+coordinate has received a successful first label.  At prime $p$,
+\[
+ v_j^{\rm new}=
+ \frac{(p+j-1)v_j+
+ \mathbf1_{\{p\in\mathcal F\}}(k-j+1)v_{j-1}}{p+k-1}.
+\]
+Divide $v_j$ by the falling factorial $(k)_j$ and clear the common
+denominators.  This is exactly the coefficient recurrence in
+\eqref{fnd:prime-operator}.  At $j=k$, the probability is
+$M_k(g,R)$, proving \eqref{fnd:operator-coefficients}.
+
+The all-active form of this differential recurrence is a generalized
+Bell-polynomial recurrence studied in \cite{fndDuran2024}.  We give
+the masked normalization and positive construction explicitly,
+because they are what connect the recurrence to the digits.
+
+
+
+\begin{proof}[Proof of Theorem~\ref{fnd:mask-operator}]
+Set
+\[
+ \eta_R=\prod_{p\le R}\frac{p-1}{p},\qquad
+ \mathcal P_R(z)=\frac{U_R(\eta_Rz)}{\prod_{p\le R}(p-1)}.
+\]
+Its constant term is one.  If
+$K_R(k)=\prod_{p\le R}(1-1/p)^k(1+k/(p-1))$, then
+\eqref{fnd:operator-coefficients} gives
+\begin{equation}
+ [z^k]\mathcal P_R(z)=K_R(k)\frac{M_k(g,R)}{k!}.
+ \label{fnd:normalized-coefficients}
+\end{equation}
+These coefficients are between zero and $1/k!$ and tend to
+$K(k)M_k(g)/k!$.  It follows that $\mathcal P_R\to\Psi_g$
+locally uniformly.
+
+We construct positive matrices with determinant $\mathcal P_R$.
+Suppose the previous matrix has eigenvalues
+$\alpha_1,\ldots,\alpha_m>0$.  At prime $p$, put
+$c=p-1$, $u=c/p$ and $\eta_{\rm new}=u\eta_{\rm old}$.
+Begin with
+\[
+ B=\operatorname{diag}(u\alpha_1,\ldots,u\alpha_m),\qquad
+ w=(\sqrt{u\alpha_1},\ldots,\sqrt{u\alpha_m})^{\mathsf T}.
+\]
+If $p\in\mathcal F$, adjoin one zero coordinate to $B$ and
+the component $\sqrt{\eta_{\rm new}}$ to $w$.  In either case
+set $A_R=B+c^{-1}ww^{\mathsf T}$.  Start with the empty matrix.
+The matrix determinant lemma gives
+\[
+ \det(I+zA_R)=
+ \left(1+\frac Dc+
+ \frac{\mathbf1_{\{p\in\mathcal F\}}\eta_{\rm new}z}{c}\right)
+ \mathcal P_{<p}(uz),
+\]
+which is the normalization of \eqref{fnd:prime-operator}.
+The matrices are positive definite whenever nonempty: a newly
+adjoined null coordinate is filled by the nonzero last component
+of $w$.
+
+The old diagonal entries of $A_R$ are exactly the previous
+$\alpha_i$, because $u(1+1/c)=1$.  At a disabled prime the new
+diagonal entry is $\eta_{\rm old}/p=\delta_{\ell(p)}$.
+Therefore
+\begin{equation}
+ \operatorname{tr}A_R=
+ S_R:=\sum_{\substack{p\le R\\p\in\mathcal F}}\delta_{\ell(p)}
+ \longrightarrow S_g.
+ \label{fnd:finite-trace}
+\end{equation}
+Sort each eigenvalue list decreasingly and pad it with zeros.
+For every fixed $j$, the sum of its first $j$ entries is
+nondecreasing through the updates: the variational characterization
+of that sum bounds it below by the trace on the old leading $j$
+coordinate directions.  These sums are bounded by one and hence
+converge.  Their consecutive differences define a decreasing
+summable list $\alpha_1,\alpha_2,\ldots\ge0$.
+
+No trace disappears in this passage.  Given a cutoff with $m$
+disabled primes, every later sum of the first $m$ eigenvalues is
+at least $S_R$.  Passing to the limit and then increasing the
+cutoff shows $\sum_j\alpha_j\ge S_g$.  The reverse inequality
+follows from \eqref{fnd:finite-trace}.  Thus the padded lists
+converge in $\ell^1$, and their determinant products converge
+locally uniformly to
+\[
+ \Psi_g(z)=\prod_j(1+\alpha_jz),\qquad \sum_j\alpha_j=S_g.
+\]
+Take $A_g$ to be the diagonal operator with these positive
+eigenvalues.  In the finite-mask case its rank equals the degree,
+which is $\#\mathcal F$ by Proposition~\ref{fnd:moment-positivity}.
+In the infinite case every coefficient is positive, so the function
+cannot be a finite product.  This proves the rank statement and
+the location of the zeros.
+\end{proof}
+
+\subsection{Why the entire series is the actual density}\label{app:fnd:entire-density}
+
+\begin{proof}[Proof of Theorem~\ref{fnd:entire-density}]
+For a cutoff $R$, write
+\[
+ L_R=\prod_{p\le R}\frac p{p-1},\qquad
+ Y_R=\sum_{p\le R}\frac{E_p}{p-1},\qquad
+ W_R=L_Re^{-Y_R}.
+\]
+The summands of $Y_R$ have distinct exponential rates $r_p=p-1$.
+Partial fractions of $\prod_{p\le R}r_p/(r_p+s)$ show that
+the density of $Y_R$ is
+\[
+ \sum_{p\le R}
+ r_p\prod_{\substack{q\le R\\q\ne p}}
+ \frac{r_q}{r_q-r_p}\ e^{-r_py},\qquad y>0.
+\]
+After the change of variable $w=L_Re^{-y}$ this becomes
+\begin{equation}
+ f_R(w)=\sum_{p\le R}c_{p,R}w^{p-2}\quad(0<w<L_R),
+ \qquad c_{p,R}=\frac1{K_R'(1-p)}.
+ \label{fnd:finite-density}
+\end{equation}
+It is zero for $w>L_R$.  One can check the coefficient without
+transform notation: the change of variable multiplies the
+coefficient of $e^{-r_py}$ by $L_R^{-r_p}$, which is exactly
+the reciprocal derivative in \eqref{fnd:finite-density}.
+
+For fixed $p$, the derivative $K'(1-p)$ is nonzero.  Its factors
+from primes below $p$ are negative, and all remaining factors
+apart from the differentiated one are positive, proving the
+claimed sign.  Moreover
+\begin{equation}
+ |c_{p,R}|\le |c_p|\quad(R\ge p),\qquad c_{p,R}\longrightarrow c_p.
+ \label{fnd:coefficient-domination}
+\end{equation}
+Indeed, adding a prime $q>p$ to the derivative multiplies it by
+\[
+ \left(1+\frac1{q-1}\right)^{p-1}
+ \left(1-\frac{p-1}{q-1}\right),
+\]
+a number strictly between zero and one.  Taking logarithms and
+using $\log(1+u)<u$ and $\log(1-v)<-v$ proves the upper bound
+of one.  The infinite tail converges to a nonzero product.
+
+We next bound the infinite coefficient.  Put $m=p-1$.  Separating
+the prime factors at $2p$ gives the exact expression
+\begin{align*}
+ \log|K'(-m)|={}&m\sum_{q\le2p}\log\frac q{q-1}-\log m\\
+ &+\sum_{\substack{q\le2p\\q\ne p}}
+       \log\frac{|q-p|}{q-1}\\
+ &+\sum_{q>2p}\left[m\log\frac q{q-1}
+       +\log\left(1-\frac m{q-1}\right)\right].
+\end{align*}
+Mertens' product estimate makes the first line
+$p\log\log p+O(p)$; a statement of the classical product
+estimate is recalled in \cite[Section 2]{fndLagarias2002}.
+Each ratio in the middle line lies between $1/(2p)$ and $2p$.
+Chebyshev's bound $\pi(2p)=O(p/\log p)$ therefore bounds
+that line in absolute value by $O(p)$.
+For $q>2p$, cancellation of the linear terms leaves an error
+$O(p^2/q^2)$, whose sum is $O(p)$ even if all integers $q>2p$
+are included.  This proves \eqref{fnd:residue-decay}.  It follows
+that the series in \eqref{fnd:density-series} converges absolutely
+and uniformly on every compact subset of $\mathbb C$.
+
+Finally, $L_R\to\infty$ by Mertens' theorem.  On any fixed
+interval $[0,B]$, the polynomial formula
+\eqref{fnd:finite-density} therefore applies for large $R$,
+with values at zero supplied by continuity.  Equations
+\eqref{fnd:coefficient-domination} and
+\eqref{fnd:residue-decay} imply uniform convergence $f_R\to f$
+there, by dominated convergence of the power series.
+On the other hand, $W_R\to W$ almost surely.  For every continuous
+compactly supported test function in $(0,\infty)$, uniform
+convergence of densities and weak convergence of the random
+variables give the same integral.  Hence the restriction of $f$
+to $(0,\infty)$ is exactly the law's density.  Since $W$ is
+positive and finite almost surely, no missing mass occurs at an
+endpoint.  Its integral is one.  Each $c_p$ is nonzero, proving
+\eqref{fnd:prime-taylor-support}.
+\end{proof}
+
+\subsection{Why signed correlations become probabilities}\label{app:correlations}
+\begin{proof}[Proof of Proposition~\ref{fnd:moment-positivity}]
+Write $a_g=h_g+(1-h_g)\lambda$ as in
+\eqref{fnd:mask}.  Truncate the lane mask to primes at most $R$,
+and truncate the coprimality condition at the same cutoff.  The
+mean error is at most a constant depending on $k$ times
+\[
+ \prod_{p\le R}(1-1/p)+\sum_{p>R}p^{-2}+o_N(1).
+\]
+The first term bounds coordinates with no prime divisor at most
+$R$; the second bounds a large-prime collision.
+
+For fixed $R$, expand the product of the truncated signed digits.
+Every term containing a Liouville factor in at least one coordinate
+has average zero.  To see this, partition the finite prime
+divisibility patterns among coordinates.  In each coordinate,
+inclusion--exclusion reduces the required sum to finitely many
+expressions $\lambda(d)L(N/d)$ with fixed $d$, which are $o(N)$.
+The other coordinates contribute bounded normalized sums.  Thus
+only the term $\prod_i h_g(n_i)$ remains in the limit.
+Letting $R\to\infty$ and dividing by the positive limit $K(k)$
+proves existence and identifies the conditional moment as a
+probability.
+
+Conditioning the local independent divisibility model on at most
+one divisible coordinate gives precisely the probabilities in the
+statement.  Conditioning at finitely many primes preserves
+independence across those primes; passage to all primes is valid
+because the no-collision probability tends to $K(k)>0$.
+Each coordinate receives a first prime almost surely, since
+$\prod_p(1-1/(p+k-1))=0$.  The first labels are distinct.
+There can therefore be no successful outcome with fewer than $k$
+disabled primes.  Given $k$ such primes, prescribe them as the
+first labels of the coordinates and prescribe no incompatible
+choices at the finitely many earlier primes.  This event has
+positive probability.  The case $k=1$ is the lane-density formula.
+\end{proof}

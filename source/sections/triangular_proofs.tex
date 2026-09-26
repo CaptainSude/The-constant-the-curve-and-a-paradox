@@ -1,0 +1,303 @@
+\section{Proof of the triangular spectral limit}\label{triapp:all}
+This appendix proves Theorem~\ref{tri:main}, retaining the zero-counting
+and centering estimates that determine its normalization.
+Throughout, $c=e^{-\gamma}$.
+\subsection{An entire function with a measurable supply of zeros}
+Put
+\[
+ \mathcal E(z)=\sum_{k\ge0}K(k)\frac{z^k}{k!},\qquad
+ \kappa(t)=-\log K(t)\quad(t\ge0).
+\]
+The more accurate prime estimates needed below are
+\begin{equation}\label{tri:kappa}
+ \begin{split}
+ \kappa'(t)&=\log\log t+\gamma+O((\log t)^{-2}),\\
+ \kappa''(t)&=\frac{1+O((\log t)^{-1})}{t\log t},\\
+ |\kappa'''(t)|&\ll(t^2\log t)^{-1}.
+ \end{split}
+\end{equation}
+Here and below derivative asymptotics concern $t\to\infty$.
+
+We explain the extra precision in the first line, since an error of
+order $1/\log t$ would change the final location.  Differentiation
+gives
+\[
+ \kappa'(t)=\sum_p\left\{-\log(1-1/p)-\frac1{p+t-1}\right\}.
+\]
+After splitting at $p=t$, Mertens' product theorem supplies
+$\log\log t+\gamma$ with error $o((\log t)^{-2})$.
+Replacing $p+t-1$ by $p+t$, and the logarithm by $1/p$ above $t$,
+costs $O(1/(t\log t))$.  The remaining prime sum is
+\[
+ -\sum_{p\le t}\frac1{p+t}
+       +\sum_{p>t}\frac{t}{p(p+t)}.
+\]
+Partial summation with the classical prime-number-theorem error
+turns its part on $t^{1/2}\le p\le t^{3/2}$ into the integral
+of $h(v)/(\log t+\log v)$, where
+\[
+ h(v)=
+ \begin{cases}
+ -(1+v)^{-1},&0<v\le1,\\
+ [v(1+v)]^{-1},&v>1.
+ \end{cases}
+\]
+The omitted ranges are $O(t^{-1/2}/\log t)$.
+Since $\int_0^\infty h(v)\,dv=0$ and
+$\int_0^\infty |h(v)\log v|\,dv<\infty$, the correction is
+$O((\log t)^{-2})$.  This proves the first line of
+\eqref{tri:kappa}.  Applying the same partial summation to
+$\sum_p(p+t-1)^{-2}$ proves the second; differentiating once more
+and bounding $\sum_p(p+t-1)^{-3}$ proves the third.
+
+In particular $K(k)^{1/k}\to0$.  For every $\epsilon>0$,
+\[
+ |\mathcal E(z)|\le C_\epsilon e^{\epsilon|z|}.
+\]
+Also $J_N(z/N)\to\mathcal E(z)$ locally uniformly, since its $k$th
+coefficient tends to $K(k)/k!$ and is bounded by $1/k!$.
+The negative real roots of $J_N$ therefore give
+\begin{equation}\label{tri:product}
+ \mathcal E(z)=\prod_{j\ge1}(1+z/\rho_j),\qquad
+ \rho_j>0,\qquad \sum_j\rho_j^{-1}=1.
+\end{equation}
+Here is a direct way to check the representation and its missing
+exponential factor.  Write
+$J_N(z/N)=\prod_j(1+\alpha_{N,j}z)$ with
+$\alpha_{N,j}\ge0$ and $\sum_j\alpha_{N,j}=1$.
+Sort these numbers and take coordinate limits along a subsequence.
+The small factors, using
+$\log(1+\alpha z)=\alpha z+O_z(\alpha^2)$, contribute an exponential
+$e^{az}$ with $a\ge0$; the remaining factors give the product in
+\eqref{tri:product}.  A positive $a$ contradicts the zero exponential
+type bound on the positive axis.  Hence $a=0$, and
+$\mathcal E'(0)=K(1)=1$ gives the reciprocal sum.
+There must be infinitely many factors, since every coefficient of
+$\mathcal E$ is positive.  In particular $\mathcal E(-z)$ belongs
+to the Laguerre--Pólya class and has only positive zeros.
+
+\begin{lemma}[Arithmetic zero density]\label{tri:zeros}
+With $n(r)=\#\{j:\rho_j\le r\}$,
+\[
+ n(r)\sim c\,\frac r{\log^2r},\qquad
+ \rho_n\sim c^{-1}n\log^2n.
+\]
+\end{lemma}
+\begin{proof}
+For $r>0$, define a random nonnegative integer $L_r$ by
+\[
+ \Prob(L_r=k)=\frac{K(k)r^k/k!}{\mathcal E(r)}.
+\]
+Choose $m>0$ from $r=me^{\kappa'(m)}$; the right side is strictly
+increasing from zero to infinity.  If $P$ is Poisson with mean $m$,
+put $\Delta=P-m$ and
+\[
+ \beta(k)=\kappa(k)-\kappa(m)-\kappa'(m)(k-m)\ge0.
+\]
+Convexity of $\kappa$ gives the inequality, and direct cancellation
+gives the exact change of measure
+\begin{equation}\label{tri:poissontilt}
+ \Prob(L_r=k)=
+ \frac{e^{-\beta(k)}}{\E e^{-\beta(P)}}\Prob(P=k).
+\end{equation}
+
+Write $A=\kappa''(m)$.  For $|\Delta|\le m/2$,
+\[
+ \beta(P)=\tfrac12A\Delta^2+
+ O\left(\frac{|\Delta|^3}{m^2\log m}\right).
+\]
+The complementary Poisson tail is exponentially small; multiplication
+by any of the fixed powers below preserves that bound.
+For example, $\kappa(k)=O(k\log(k+2))$ controls $\beta(k)$ there.
+Using the Poisson central moments
+\[
+ \E\Delta^2=m,\quad \E\Delta^3=m,\quad
+ \E\Delta^4=3m^2+m,\quad
+ \E\Delta^6=15m^3+25m^2+m
+\]
+and Cauchy--Schwarz for intermediate absolute moments yields
+\[
+ \begin{aligned}
+ \E\beta(P)&=\tfrac12Am+O(m^{-1/2}/\log m),&
+ \E\beta(P)^2&=O((\log m)^{-2}),\\
+ \E[\Delta^2\beta(P)]
+   &=\tfrac12A(3m^2+m)+O(\sqrt m/\log m),&
+ \E[\Delta^2\beta(P)^2]&=O(m/(\log m)^2).
+ \end{aligned}
+\]
+Insert $e^{-\beta}=1-\beta+O(\beta^2)$ in
+\eqref{tri:poissontilt}.  The mean displacement is
+$O(\sqrt m/\log m)$, and the second moment about $m$ is
+\[
+ \E(L_r-m)^2
+ =m-\tfrac12A(2m^2+m)+o(m/\log m)
+ =m-\frac m{\log m}+o(m/\log m).
+\]
+The square of the mean displacement is $O(m/(\log m)^2)$.
+Consequently
+\begin{equation}\label{tri:vardeficit}
+ \Var(L_r)-\E L_r=-\frac m{\log m}(1+o(1)).
+\end{equation}
+
+For $g(r)=\log\mathcal E(r)$, differentiation of the probability
+weights and of \eqref{tri:product} gives
+\[
+ g'(r)=\frac{\E L_r}{r},\qquad
+ g''(r)=\frac{\Var(L_r)-\E L_r}{r^2}
+      =-\sum_j(r+\rho_j)^{-2}.
+\]
+Thus
+\begin{equation}\label{tri:stieltjes}
+ \sum_j(r+\rho_j)^{-2}\sim\frac c{r\log^2r}.
+\end{equation}
+We will also need the more accurate first-derivative estimate
+\begin{equation}\label{tri:firstderivative}
+ g'(r)=\frac c{\log m}+O((\log m)^{-3}),
+ \qquad r=me^{\kappa'(m)},
+\end{equation}
+which follows from the mean bound and \eqref{tri:kappa}.
+
+For clarity, we give the short Tauberian step that extracts $n(r)$.
+Form the positive measure
+\[
+ d\eta_r(u)=\frac{\log^2r}{cr}\frac{dn(ru)}{(1+u)^2}
+ \quad (u\ge0)
+\]
+and push it forward under $v=(1+u)^{-1}$ to a measure $\lambda_r$
+on $[0,1]$.  Its mass tends to one by \eqref{tri:stieltjes}, and
+for every $t>0$,
+\[
+ \int_0^1\frac{d\lambda_r(v)}{[1+(t-1)v]^2}
+ =\frac{r\log^2r}{c}\sum_j(tr+\rho_j)^{-2}
+ \longrightarrow\frac1t.
+\]
+The uniform probability measure on $[0,1]$ has these same integrals.
+Expanding near $t=1$ determines all moments, which determine a measure
+on this compact interval.  Every subsequential limit is therefore
+uniform.  It follows that
+\[
+ \frac{\log^2r}{cr}n(r)
+ =\int_{1/2}^1v^{-2}\,d\lambda_r(v)\longrightarrow1.
+\]
+The discontinuity at $1/2$ has zero limiting mass.
+Asymptotic inversion now gives the formula for $\rho_n$.
+\end{proof}
+
+\subsection{The transfer theorem and the location constant}
+We invoke Campbell and Jalowy
+\cite[Corollary 2.3(2)]{finCampbellJalowy}.
+For a Laguerre--Pólya function with zero-counting law regularly varying
+with index $\alpha\in(0,2)$, their theorem gives a free-stable limit for
+suitably scaled and centered Appell roots.  The one-sided index-one
+case is included.
+
+Apply it to $F(z)=\mathcal E(-z)$, whose compensated product is
+\[
+ F(z)=e^{-z}\prod_j(1-z/\rho_j)e^{z/\rho_j}.
+\]
+Its linear parameter is $1$, its Gaussian parameter is zero,
+and all its zeros are positive.  Put
+\[
+ B_n=\rho_n,\qquad
+ S(B)=\sum_j\frac{\rho_j}{\rho_j^2+B^2}.
+\]
+In the convention of the cited theorem, take limiting location zero.
+Its prescribed exponential shift is
+\[
+ a_n=-\frac{B_n}{n}
+   +\frac1n\sum_j
+       \frac{(B_n/\rho_j)^3}{1+(B_n/\rho_j)^2}
+   =-\frac{B_n}{n}S(B_n),
+\]
+where the equality uses $\sum_j1/\rho_j=1$.
+The Appell polynomial of $F$ is
+\[
+ A_{n,F}(x)=\sum_{k=0}^n(-1)^kK(k)\binom nkx^{n-k}
+          =x^nJ_n(-1/x).
+\]
+Its roots are $R_{n,j}^{-1}$.  Replacing $F(z)$ by
+$e^{-a_nz}F(B_nz/n)$ multiplies these roots by $B_n/n$
+and adds $a_n$.  The transfer theorem therefore gives
+\begin{equation}\label{tri:appelllimit}
+ \frac1n\sum_j\delta_{X_{n,j}}\Longrightarrow\mu_+,\qquad
+ X_{n,j}=\frac{B_n}{n}\{R_{n,j}^{-1}-S(B_n)\}.
+\end{equation}
+The limit has weighted Lévy measure
+$\mathbf{1}_{x>0}(1+x^2)^{-1}dx$ and zero location.
+
+To identify its normalization, the free Lévy--Khintchine formula gives
+\[
+ R_{\mu_+}(u)=\int_0^\infty
+                  \frac{u+x}{(1-xu)(1+x^2)}\,dx=-\log(-u).
+\]
+For instance, at $u=-s<0$ the integrand equals
+$x/(1+x^2)-s/(1+sx)$, whose integral is $-\log s$.
+Analytic continuation fixes the branch on the lower half-plane.
+
+The remaining step is arithmetic: replace $S(B_n)$ by an explicit
+elementary center.  We claim
+\begin{equation}\label{tri:centercancellation}
+ S(B)-g'(B)=o((\log B)^{-2}).
+\end{equation}
+Lemma~\ref{tri:zeros} makes the rescaled measure
+$(\log^2B/B)\,dn(Bu)$ converge vaguely to $c\,du$, so
+\[
+ \begin{split}
+ &\log^2B\{S(B)-g'(B)\}\\
+ &\quad=\int_0^\infty
+ \left\{\frac u{1+u^2}-\frac1{1+u}\right\}
+               \frac{\log^2B}{B}\,dn(Bu)
+ \longrightarrow0.
+ \end{split}
+\]
+Indeed the kernel is bounded at zero, is $O(u^{-2})$ at infinity,
+and has integral zero: its antiderivative is
+$\tfrac12\log(1+u^2)-\log(1+u)$.
+To justify the tails, below $u=B^{-1/2}$ the rescaled mass is
+$O(B^{-1/2})$; from there to a fixed small $\epsilon$,
+$n(Bu)\ll Bu/\log^2B$ gives $O(\epsilon)$.
+Above a fixed $A>1$, the same bound and partial summation give
+$O(A^{-1})$.  This proves \eqref{tri:centercancellation}.
+
+Choose $m_n$ with $B_n=m_ne^{\kappa'(m_n)}$.
+The zero density gives $m_n\sim n\log n$, and hence
+$\log m_n=\log n+\log\log n+o(1)$.
+Combining \eqref{tri:firstderivative} and
+\eqref{tri:centercancellation} yields
+\begin{equation}\label{tri:center}
+ \frac c{S(B_n)}=\log n+\log\log n+o(1),\qquad
+ \frac{cn}{B_nS(B_n)^2}\to1,\qquad
+ \frac n{B_nS(B_n)}\to0.
+\end{equation}
+The exact identity
+\[
+ cR_{n,j}-\frac c{S(B_n)}
+ =-\frac{cn}{B_nS(B_n)^2}\,
+       \frac{X_{n,j}}{1+\frac n{B_nS(B_n)}X_{n,j}}
+\]
+now completes the transfer.  The empirical laws of $X_{n,j}$ are
+tight by \eqref{tri:appelllimit}; on each fixed compact interval
+the right side converges uniformly to $-X_{n,j}$.
+Thus \eqref{tri:centered} has the reflected limit law of $T$,
+with $R$-transform $\log u$.
+
+The limiting density has the following explicit parametrization:
+\begin{equation}\label{tri:density}
+ x(\theta)=\log\frac{\sin\theta}{\theta}+\theta\cot\theta,\qquad
+ f_T(x(\theta))=\frac{\sin^2\theta}{\pi\theta},
+ \quad 0<\theta<\pi.
+\end{equation}
+For completeness, it can be read from the Cauchy-transform
+equation $z=1/G(z)+\log G(z)$.
+On the support write $G(x+i0)=r e^{-i\theta}$.
+The imaginary part forces $r=\sin\theta/\theta$; the real part and
+Stieltjes inversion give exactly \eqref{tri:density}.
+The function $x(\theta)$ decreases from $1$ to $-\infty$.
+Arizmendi and Hasebe \cite[Proposition 4.4]{triArizmendiHasebe}
+identify the exponential of this precisely normalized law with
+$\operatorname{DH}_1$.
+Alternatively, applying the exponential change of variables to
+\eqref{tri:density} gives the Dykema--Haagerup density directly.
+The continuous mapping theorem proves \eqref{tri:exp}.
+
+

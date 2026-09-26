@@ -1,0 +1,262 @@
+\section{Proofs for the variance and twin-prime criteria}\label{app:criteria}
+
+\subsection{The RH variance criterion}\label{app:rh-variance}
+
+\begin{lemma}[The smoothed prime discrepancy]\label{cq:smoothed}
+Fix a real \(m>1\), and set
+\[
+ H_m(v)=\sum_p(p+v)^{-m}
+       -\int_2^\infty\frac{du}{(u+v)^m\log u},\qquad v>0.
+\]
+Put
+\[
+ B_m=\frac{\Gamma(1/2)\Gamma(m-1/2)}{2\Gamma(m)},\qquad
+ S=1+\frac{\gamma_{\!E}}2-\frac12\log(4\pi).
+\]
+On RH, with nontrivial zeros counted with multiplicity,
+\begin{equation}\label{cq:zeroseries}
+ v^{m-1/2}\log v\,H_m(v)
+ =-B_m-\sum_\rho
+ \frac{\Gamma(\rho)\Gamma(m-\rho)}{\Gamma(m)}
+ v^{i\Im\rho}+o(1).
+\end{equation}
+The series is absolutely convergent, uniformly in \(\log v\), and its absolute
+value is at most \(2SB_m<B_m\). If RH fails, the expression on the left of
+\eqref{cq:zeroseries} has limsup \(+\infty\) and liminf \(-\infty\).
+\end{lemma}
+
+\begin{proof}
+We spell out the removal of the logarithmic prime weight. The classical
+ingredients are the logarithmic derivative of zeta, its explicit formula,
+the zero-counting bound and the RH estimate for the Chebyshev function; see
+\cite[Chapters II, III, IX and XIV]{Titchmarsh1986}.
+For \(a\geq0\), define
+\[
+ Q_{m,a}(v)=
+ \sum_p\frac{(\log p)p^{-a}}{(p+v)^m}
+ -\int_2^\infty\frac{u^{-a}}{(u+v)^m}\,du .
+\]
+Since \(\int_0^\infty u^{-a}\,da=1/\log u\), applying Tonelli separately to the
+two nonnegative terms gives
+\begin{equation}\label{cq:removeweight}
+                      H_m(v)=\int_0^\infty Q_{m,a}(v)\,da.
+\end{equation}
+Assume RH and take \(0\leq a\leq a_0=1/8\). For \(1<c<m\), Mellin inversion is
+\[
+ \sum_{n\geq2}\frac{\Lambda(n)n^{-a}}{(n+v)^m}
+ =\frac{1}{2\pi i}\int_{(c)}
+ \frac{\Gamma(s)\Gamma(m-s)}{\Gamma(m)}
+ \left(-\frac{\zeta'(s+a)}{\zeta(s+a)}\right)v^{s-m}\,ds.
+\]
+Move the line to \(\Re s=1/4\). The pole at \(1-a\) gives the continuous
+integral over \((0,\infty)\); a zero \(\rho\) gives the residue
+\[
+ -\frac{\Gamma(\rho-a)\Gamma(m-\rho+a)}{\Gamma(m)}v^{\rho-a-m}.
+\]
+The remaining integral is \(O_m(v^{1/4-m})\), uniformly in \(a\).
+Indeed, the new zeta arguments have real parts in \([1/4,3/8]\), separated
+from all zeros on RH. Polynomial bounds for the logarithmic derivative and
+exponential decay of the gamma factors control the vertical integral;
+the horizontal segments may be chosen at the usual heights avoiding zeros.
+Changing the continuous lower endpoint from \(0\) to \(2\) costs \(O_m(v^{-m})\).
+
+We must remove the prime powers from the von Mangoldt sum. The squares
+contribute
+\[
+ \sum_p\frac{(\log p)p^{-2a}}{(p^2+v)^m}
+ =v^{1/2-a-m}
+ \left\{\frac{\Gamma(1/2-a)\Gamma(m-1/2+a)}{2\Gamma(m)}+o_m(1)\right\}.
+\]
+This is the prime number theorem applied as a Stieltjes integral against
+\(\vartheta(u)\), followed by \(u=\sqrt v\,y\). The rescaled kernels and
+their derivatives have common integrable majorants for \(0\leq a\leq1/8\),
+so the error is uniform. Powers of exponent at least three contribute
+\(O_m(v^{1/3-m}\log^2 v)\), by Chebyshev's bound and dyadic summation.
+Consequently
+\[
+ Q_{m,a}(v)=v^{1/2-a-m}
+ \left\{-B_m(a)-\sum_\rho C_{m,\rho}(a)v^{i\Im\rho}+o_m(1)\right\},
+\]
+uniformly on the parameter interval, where
+\[
+ B_m(a)=\frac{\Gamma(1/2-a)\Gamma(m-1/2+a)}{2\Gamma(m)},\qquad
+ C_{m,\rho}(a)=\frac{\Gamma(\rho-a)\Gamma(m-\rho+a)}{\Gamma(m)}.
+\]
+The zero sums of the coefficients and their first \(a\)-derivatives converge
+uniformly. The elementary endpoint estimate
+\[
+ L\int_0^{a_0}e^{-aL}g(a)\,da=g(0)+o(1),\qquad L\longrightarrow\infty,
+\]
+therefore gives \eqref{cq:zeroseries} from this part of \eqref{cq:removeweight}.
+
+The discarded parameter tail also needs a bound. With
+\(E(u)=\vartheta(u)-u+2\), interpreted from \(2^-\), that tail equals
+\[
+ \int_{[2,\infty)}
+ \frac{u^{-a_0}}{\log u\,(u+v)^m}\,dE(u).
+\]
+On RH, \(E(u)=O(\sqrt u\log^2u)\). Integration by parts bounds the last
+display by
+\[
+ O_m\!\left(
+ \int_2^\infty\frac{u^{-a_0-1/2}\log u}{(u+v)^m}\,du+
+ \int_2^\infty\frac{u^{1/2-a_0}\log u}{(u+v)^{m+1}}\,du\right)
+ =O_m(v^{1/2-a_0-m}\log v).
+\]
+This is \(o(v^{1/2-m}/\log v)\), as required.
+
+Next we compare the square term with the zeros. The Hadamard product gives,
+on RH,
+\[
+ \sum_{\gamma>0}\frac{1}{\gamma^2+1/4}=S=0.0230957\ldots .
+\]
+The gamma integral, reflection formula and
+\(\cosh(\pi\gamma)\geq4(\gamma^2+1/4)^2\) imply
+\[
+ \sum_\rho\left|
+ \frac{\Gamma(\rho)\Gamma(m-\rho)}{\Gamma(m)}
+ \right|\leq 2B_m S .
+\]
+For the elementary hyperbolic bound it suffices to retain the constant,
+quadratic and quartic terms of the series for \(\cosh\).
+This proves the claimed strict negative margin on RH.
+
+For the converse, initially in \(1<\Re s<m\), Mellin transformation gives
+\begin{equation}\label{cq:mellinconverse}
+ \int_0^\infty v^{m-s-1}H_m(v)\,dv
+ =\frac{\Gamma(s)\Gamma(m-s)}{\Gamma(m)}F(s),
+\end{equation}
+where
+\[
+ F(s)=P(s)-J(s),\qquad
+ P(s)=\sum_pp^{-s},\qquad
+ J(s)=\int_2^\infty\frac{u^{-s}}{\log u}\,du .
+\]
+Write \(R(s)=\sum_{k\geq2}P(ks)/k\). This is analytic on \(\Re s>1/2\), and
+continuation of the derivative of \(F\) gives
+\begin{equation}\label{cq:Fderivative}
+ F'(s)=\frac{\zeta'(s)}{\zeta(s)}-R'(s)+\frac{2^{1-s}}{s-1}.
+\end{equation}
+The singularities at the real point \(1\) cancel. There are no other real
+singularities above \(1/2\). An off-line zero \(\rho\) with
+\(\Re\rho>1/2\), however, gives a nonzero pole of \(F'\), hence a
+nonremovable logarithmic singularity of \(F\).
+
+Suppose the normalized discrepancy were eventually bounded below by \(-C\).
+For a sufficiently large \(V>1\), the function
+\[
+ h(v)=v^m H_m(v)+C\,v^{1/2}/\log v
+\]
+would be nonnegative on \([V,\infty)\). Its Mellin integral
+\(\int_V^\infty h(v)v^{-s-1}\,dv\) has an abscissa of convergence
+\(\sigma_c\leq1\). The off-line singularity implies
+\(\sigma_c\geq\Re\rho>1/2\): the added term is analytic to the right of
+\(1/2\), and the short integral omitted from \eqref{cq:mellinconverse}
+is analytic for \(\Re s<m\).
+
+Landau's positivity argument forces a singularity at the real point
+\(\sigma_c\), contradicting \eqref{cq:Fderivative}. Here is the argument
+in the required form. If a Mellin transform of a nonnegative function
+were analytic at its finite real abscissa, expand at a slightly larger
+real point. The Taylor coefficients evaluated in the leftward direction
+are integrals of nonnegative powers of \(\log v\). Tonelli then turns
+convergence of the Taylor series just to the left of the abscissa into
+convergence of the defining integral there, a contradiction.
+Applying the same reasoning to \(-H_m\) rules out an eventual upper bound.
+This proves both unbounded oscillations.
+\end{proof}
+
+Theorem~\ref{cq:rhvariance} follows by taking \(m=2\) and \(v=t-1\).
+There is also a useful warning about the order of quantifiers. At any fixed
+\(v>0\), the atom at \(2\) eventually dominates as \(m\) grows:
+\[
+ \sum_p(p+v)^{-m}\geq(v+2)^{-m},\qquad
+ \int_2^\infty\frac{du}{(u+v)^m\log u}
+ \leq\frac{(v+2)^{1-m}}{(m-1)\log2}.
+\]
+Thus \(H_m(v)>0\) whenever \((m-1)\log2>v+2\). Each fixed order can
+eventually have the RH sign; one cannot require that sign for every order
+on one common tail.
+
+
+
+\subsection{Counting twin pairs with negative directions}\label{app:twin-index}
+
+\begin{proof}[Proof of Theorem~\ref{cq:twins}]
+The finite quotients are
+\[
+ F_y(t)=\prod_{2<p\leq y}(1-p^{-1})^3
+                  \left(1+\frac3{t+p-1}\right).
+\]
+Each factor is completely monotone on \(t>-2\): its successive derivatives
+alternate in sign. The products converge locally uniformly near that real
+interval, because the terms of order \(1/p\) in their logarithms cancel.
+Their derivatives converge too. Leibniz's rule proves complete monotonicity
+of the limit; separating the factor for \(p=3\) makes all the inequalities
+strict. This proves entrywise positivity.
+
+The residue at the pole \(1-p\) is
+\[
+ b_p=\frac{K_o(4-p)}{K_o'(1-p)}
+ =3(1-p^{-1})^3
+  \prod_{\substack{q>2\\q\ne p}}
+       (1-q^{-1})^3\left(1+\frac3{q-p}\right).
+\]
+For fixed \(p\), the tail factors are \(1+O_p(q^{-2})\).
+Among the factors with \(q<p\), exactly one can be negative:
+the factor with \(q=p-2\), if that prime exists. No factor vanishes,
+since odd-prime differences cannot equal three. Hence
+\begin{equation}\label{cq:twinsign}
+                b_p<0\quad\Longleftrightarrow\quad p-2\text{ is prime}.
+\end{equation}
+
+To pass from residues to derivatives we need a uniform bound. Let \(b_{p,y}\)
+be the finite-product residue. For \(q<p\), each factor in absolute value
+is at most one. For \(p<q\leq2p\), comparison with all even distances gives
+\[
+ \prod_{p<q\leq2p}\left(1+\frac3{q-p}\right)
+ \leq\prod_{1\leq j\leq p/2}\left(1+\frac3{2j}\right)\ll p^{3/2}.
+\]
+For \(q>2p\), the logarithm of the combined factor is at most
+\[
+             -\frac3q+\frac3{q-p}\leq\frac{6p}{q^2}.
+\]
+Even its sum over all integers is bounded. Thus, uniformly for \(y\geq p\),
+\[
+                      |b_{p,y}|\leq C p^{3/2}.
+\]
+Differentiate the finite partial fractions at least twice and use dominated
+convergence:
+\begin{equation}\label{cq:partialfractions}
+ \frac{(-1)^k F^{(k)}(a)}{k!}
+       =\sum_{p>2}\frac{b_p}{(a+p-1)^{k+1}},\qquad k\geq2.
+\end{equation}
+The absolute majorant for \(k=2\) is already bounded by
+\(C\sum_{n\geq1}n^{-3/2}\). This explains why the matrix starts with the
+second derivative.
+
+Define the finite signed measure
+\[
+ \sigma_a=\sum_{p>2}\frac{b_p}{(a+p-1)^3}
+                      \delta_{\,1/(a+p-1)} .
+\]
+Its support is compact, with its only possible accumulation point at zero.
+Equation~\eqref{cq:partialfractions} identifies the matrix quadratic form as
+\[
+ c^{\mathsf T}\mathsf H_N(a)c
+       =\int\left(\sum_{j=0}^{N-1}c_j u^j\right)^2\,d\sigma_a(u).
+\]
+If \(\sigma_a\) has \(J\) negative atoms, the negative part of this form
+has rank at most \(J\), giving the upper bound on its negative index.
+
+Conversely, choose any \(k\) negative atoms. They are isolated, so disjoint
+continuous bump functions can select them and vanish at all other support
+points. Normalize the functions so that their signed Gram matrix is
+\(-I_k\). Uniform polynomial approximation preserves this strict negative
+definiteness, because \(\sigma_a\) has finite total variation. The resulting
+polynomials have some common finite degree and span a \(k\)-dimensional
+negative subspace of a finite matrix. This proves the reverse bound,
+whether there are finitely or infinitely many negative atoms.
+Finally use \eqref{cq:twinsign} and the fact that successive matrices are
+nested principal submatrices.
+\end{proof}

@@ -1,0 +1,548 @@
+% Complete technical proofs for the recovery and information theorems.
+% Input this fragment after the manuscript's appendix command.
+
+\section{Why the recovery threshold is sharp}\label{rec:threshold-proof}
+
+The construction has three stages. Estimate the common error rate;
+denoise the table using its finite-prime approximations; then turn
+approximate frequencies into exact rationals. The last stage can be
+very slow. The theorem asserts consistency and gives no useful practical
+sample bound for the particular implementation below.
+
+\subsection{Calibrating the noise without knowing its sign}
+
+Write $J$ for the all-ones matrix and $I_N$ for the identity. All data
+matrices have zero diagonal. Set
+\[
+ \widehat q=\frac1{N(N-1)}\sum_{i\ne j}Y_{ij},\qquad
+ \widehat a=\operatorname{clip}_{[-1,1]}
+ \left(\frac{2\widehat q-1}{2\kappa-1}\right).
+\]
+Here $\operatorname{clip}_{[u,v]}$ means projection onto $[u,v]$.
+If $q_0$ is the clean empirical edge density, conditioning on $E$ gives
+\[
+ \widehat q=\tfrac12+a_N(q_0-\tfrac12)+O_{\Prob}(N^{-1}).
+\]
+Changing one integer changes $q_0$ by at most $2/N$, whence
+$q_0-\E q_0=O_{\Prob}(N^{-1/2})$. With $X=N^2$, Möbius inversion gives
+\begin{equation}\label{rec:finite-kappa}
+ \E q_0=\frac1{X^2}\sum_{d\le X}\mu(d)\lfloor X/d\rfloor^2
+ =\kappa+O(\log X/X).
+\end{equation}
+Replacing squared floors costs $O(X^{-1}\sum_{d\le X}d^{-1})$;
+the omitted tail of $\sum_d\mu(d)/d^2$ costs $O(X^{-1})$.
+Thus, for nonzero $a_N$, clipping cannot increase the absolute error and
+\begin{equation}\label{rec:calibration-error}
+ \frac{\widehat a}{a_N}-1
+ =O_{\Prob}\left(N^{-1/2}+\frac1{N|a_N|}+\frac{\log N}{N^2}\right).
+\end{equation}
+When $T_N\to\infty$, this tends to zero, the sign is eventually correct
+with probability tending to one, and $N\widehat a^2/T_N\to1$ in
+probability. In the independent-prime model the finite-range bias in
+\eqref{rec:finite-kappa} is absent.
+
+\subsection{The matrix estimate}
+
+For a matrix $U$, denote its operator and Frobenius norms by
+$\|U\|_{\mathrm{op}}$ and $\|U\|_F$. We record the exact deterministic
+estimate needed, so no uniformity condition is hidden in an external
+denoising theorem.
+
+\begin{lemma}[Spectral truncation]\label{rec:svt}
+Suppose $B=A+Z$ are symmetric and $\|Z\|_{\mathrm{op}}\le t/2$.
+Retain the eigenvalues of $B$ with absolute value at least $t$, with
+their signs, to obtain $\widehat A$. For every matrix $R$ of rank at
+most $r$,
+\[
+ \|\widehat A-A\|_F^2
+ \le C\bigl(rt^2+\|A-R\|_F^2\bigr)
+\]
+for an absolute constant $C$.
+\end{lemma}
+\begin{proof}
+Let $s_i$ be the decreasing singular values of $A$ and let $r_0$ count
+those at least $t/2$. Weyl's inequality bounds the rank of $\widehat A$
+by $r_0$. If $A_0$ is the rank-$r_0$ truncation of $A$, then
+\[
+ \|\widehat A-A_0\|_{\mathrm{op}}
+ \le\|\widehat A-B\|_{\mathrm{op}}+\|Z\|_{\mathrm{op}}
+       +\|A-A_0\|_{\mathrm{op}}\le2t.
+\]
+The difference has rank at most $2r_0$, giving
+$\|\widehat A-A\|_F^2\le16r_0t^2+2\sum_{i>r_0}s_i^2$.
+For every $r$,
+\[
+ r_0t^2\le rt^2+4\sum_{i>r}s_i^2,
+ \qquad
+ \sum_{i>r_0}s_i^2\le\sum_{i>r}s_i^2+rt^2/4.
+\]
+The best-rank approximation inequality
+$\sum_{i>r}s_i^2\le\|A-R\|_F^2$ completes the proof.
+\end{proof}
+
+Apply this to
+\[
+ B=Y-\tfrac12(J-I_N),\qquad
+ A=a_NM,\qquad M=E-\tfrac12(J-I_N),
+\]
+with threshold $t=10\sqrt N$. Conditional on the integers, the entries
+of $Z=B-A$ above the diagonal are independent, centered, and supported
+on intervals of length one. A $1/4$-net of the unit sphere has at most
+$9^N$ points. For a fixed unit vector $v$, Hoeffding's inequality gives
+$\Prob(|v^TZv|>u\mid X_1,\ldots,X_N)\le2e^{-u^2}$, because the sum
+of squared interval lengths in $2\sum_{i<j}v_iv_jZ_{ij}$ is at most
+two. The net inequality therefore yields
+\begin{equation}\label{rec:op-concentration}
+ \Prob(\|Z\|_{\mathrm{op}}>4\sqrt N\mid X_1,\ldots,X_N)
+ \le2\exp\bigl(-(4-\log9)N\bigr).
+\end{equation}
+
+The arithmetic input is a low-rank approximation. Let $F^{(m)}_{ij}$,
+including the diagonal, indicate that $i,j$ share none of the first
+$m$ primes. There are only $2^m$ truncated vertex profiles, so
+\[
+ \operatorname{rank}(F^{(m)}-J/2)\le2^m+1.
+\]
+Off the diagonal this differs from $M$ only if a larger prime is shared.
+The probability of sharing $p$ is at most $p^{-2}$, also for ordinary
+integers, and $p_m\ge m+1$. Consequently
+\begin{equation}\label{rec:rank-tail}
+ \E\frac{\|M-(F^{(m)}-J/2)\|_F^2}{N^2}
+ \le\frac1m+\frac1{4N}.
+\end{equation}
+The last term accounts for the diagonal, whose approximation error is
+exactly $1/2$ in absolute value.
+
+For the proof choose $m=\lfloor\tfrac12\log_2T_N\rfloor$.
+This choice is not used by the algorithm. Lemma~\ref{rec:svt},
+\eqref{rec:op-concentration}, \eqref{rec:rank-tail}, and Markov's
+inequality give
+\[
+ \frac{\|\widehat A-a_NM\|_F^2}{a_N^2N^2}
+ =O_{\Prob}\left(T_N^{-1/2}+\frac1{\log T_N}\right).
+\]
+For $i\ne j$, define
+$\widehat E_{ij}=\operatorname{clip}_{[0,1]}(1/2+\widehat A_{ij}/\widehat a)$,
+and set the diagonal to zero. At $\widehat a=0$ use an arbitrary fixed
+table. Equation~\eqref{rec:calibration-error} and clipping show
+\begin{equation}\label{rec:frobenius}
+ Q_N:=\frac1{N^2}\|\widehat E-E\|_F^2
+ =O_{\Prob}((\log T_N)^{-1}).
+\end{equation}
+
+\subsection{Approximate frequencies become exact primes}
+
+The algorithm commutes with vertex permutations. Thus
+\eqref{rec:frobenius} controls every fixed row in probability, even
+though it is initially a statement about the whole matrix. To see the
+rate carefully, let $G_C=\{Q_N\le C/\log T_N\}$. This event is
+permutation invariant. On it, the expected squared error of any fixed
+row, averaged across its columns and multiplied by $\mathbf1_{G_C}$,
+is $\E[Q_N\mathbf1_{G_C}]\le C/\log T_N$. Choose $C$ to make $G_C$
+likely, then use Markov's inequality on $G_C$. Hence for fixed $i$,
+\begin{equation}\label{rec:row-error}
+ \frac1N\sum_k(\widehat E_{ik}-E_{ik})^2
+ =O_{\Prob}((\log T_N)^{-1}).
+\end{equation}
+
+Form $\widehat d_i=N^{-1}\sum_k\widehat E_{ik}$ and
+$\widehat c_{ij}=N^{-1}\sum_k\widehat E_{ik}\widehat E_{jk}$.
+Cauchy--Schwarz bounds their denoising errors by
+$O_{\Prob}((\log T_N)^{-1/2})$. For the second assertion use
+\[
+ |uv-u'v'|\le |u-u'|+|v-v'|\quad(0\le u,v,u',v'\le1).
+\]
+For ordinary integers put $D(n)=\varphi(n)/n$ and
+$L_{ij}=\operatorname{lcm}(X_i,X_j)$. Inclusion--exclusion gives
+\begin{equation}\label{rec:inclusion-exclusion}
+ \left|\Prob_{U\le X}((U,n)=1)-D(n)\right|
+ \le\frac{2^{\omega(n)}}X.
+\end{equation}
+For every fixed $\delta>0$, $2^{\omega(n)}\le C_\delta n^\delta$:
+in the product $2^{\omega(n)}/n^\delta$ only finitely many primes can
+give a factor above one. Take $\delta=1/4$ and note $L_{ij}\le X^2$,
+$X=N^2$. The bias in \eqref{rec:inclusion-exclusion} is uniformly
+$O(N^{-1})$. Conditional on $X_i,X_j$, the other vertices are
+independent, so their empirical clean degree and codegree errors are
+$O_{\Prob}(N^{-1/2})$. Their targets are $D(X_i),D(X_j),D(L_{ij})$.
+
+Division by the last target is controlled uniformly, since
+\begin{equation}\label{rec:codegree-tight}
+ \E[-\log D(L_{ij})]
+ \le2\sum_p\frac{-\log(1-1/p)}p<\infty.
+\end{equation}
+Thus $D(L_{ij})^{-1}=O_{\Prob}(1)$. The corresponding infinite-model
+products satisfy the same estimate. With clipping and a default at a
+zero estimated denominator, we have in both models
+\begin{equation}\label{rec:estimated-ratio}
+ \widehat r_{ij}:=
+ \operatorname{clip}_{[0,1]}\left(\frac{\widehat d_i\widehat d_j}
+                                    {\widehat c_{ij}}\right)
+ =\frac{\varphi(R_{ij})}{R_{ij}}
+   +O_{\Prob}((\log T_N)^{-1/2}).
+\end{equation}
+
+Set $\widehat T=N\widehat a^2$ and
+\[
+ H_N=\max\left\{1,\left\lfloor
+       [\log(\max\{e,\widehat T\})]^{1/16}\right\rfloor\right\}.
+\]
+Choose the nearest reduced rational to $\widehat r_{ij}$ in $[0,1]$
+with denominator at most $H_N$, using a fixed rule for ties. If it is
+a finite totient ratio, apply Lemma~\ref{rec:totient-decoder}; otherwise
+return a fixed default. This is a finite test: reject zero, reject a
+largest denominator prime of exponent exceeding one, remove that prime
+as prescribed, and reject if the ratio leaves $(0,1]$ or the largest
+denominator prime fails to decrease. Accept only on reaching one.
+
+The true denominator is tight. For ordinary integers it is at most
+$\gcd(X_i,X_j)$ and, for $H\ge1$,
+\begin{equation}\label{rec:gcd-tail}
+ \Prob(\gcd(X_i,X_j)>H)
+ \le\sum_{d>H}\Prob(d\mid X_i,\ d\mid X_j)
+ \le\sum_{d>H}d^{-2}=O(H^{-1}).
+\end{equation}
+In the independent-prime model $R_{ij}$ is a finite random integer,
+which gives the same tightness requirement without a rate.
+Calibration implies $H_N\asymp(\log T_N)^{1/16}$ in probability.
+Distinct candidate rationals differ by at least $H_N^{-2}$, while
+\[
+ H_N^2\left|\widehat r_{ij}-\frac{\varphi(R_{ij})}{R_{ij}}\right|
+ =O_{\Prob}((\log T_N)^{-3/8})\longrightarrow0.
+\]
+The nearest rational is therefore correct with probability tending to
+one. Permutation equivariance makes this the expected fraction of
+incorrect pair outputs; Markov's inequality proves the fraction
+assertion in Theorem~\ref{rec:threshold}.
+
+\subsection{A single hidden parity bit proves necessity}
+
+Suppose along a subsequence that $T_N\le C$, so eventually $|a_N|\le1/2$.
+Giving a decoder additional information can only help it. We give almost
+everything away and retain one fair bit that changes whether a pair
+shares the prime 2.
+
+With $X=N^2$, the disjoint pairs $\{u,2u\}$, $u\le X/2$ odd, cover
+a fraction $1/2+o(1)$ of the possible values of $X_i$. On this event
+reveal the odd base $u$, leaving a fair choice between $u$ and $2u$.
+Reveal every other integer and restrict also to $X_j$ being even. This
+joint event has probability $1/4+o(1)$. The correct $R_{ij}$ contains
+2 precisely in the second case.
+
+Only the at most $N-1$ edges incident to $i$ can distinguish the cases.
+Each differing observation exchanges Bernoulli parameters
+$(1-a_N)/2$ and $(1+a_N)/2$, whose relative entropy is
+\[
+ a_N\log\frac{1+a_N}{1-a_N}\le4a_N^2\qquad(|a_N|\le1/2).
+\]
+Conditional independence bounds the total relative entropy by $4T_N$.
+For two laws $P,Q$ with equal priors, the testing error is at least
+$e^{-D(P\Vert Q)}/4$. Indeed, their Hellinger affinity $\rho$ satisfies
+$\rho\ge e^{-D(P\Vert Q)/2}$ by Jensen, while
+$\operatorname{TV}(P,Q)\le\sqrt{1-\rho^2}$ by Cauchy--Schwarz.
+The error $(1-\operatorname{TV})/2$ is consequently at least $\rho^2/4$.
+Every pair estimator thus has error at least
+\begin{equation}\label{rec:testing-lower}
+ (1/16+o(1))e^{-4T_N}.
+\end{equation}
+In the independent-prime model, hide only $B_{i,2}$ and require $B_{j,2}=1$;
+the same argument gives $e^{-4T_N}/8$.
+The bounds are uniform in the choice of pair. Their positive lower bound
+on a bounded-$T_N$ subsequence also bounds the expected pair-error
+fraction. A random variable in $[0,1]$ tending to zero in probability
+must have expectation tending to zero. Necessity follows.
+
+\section{Counting the information that survives}\label{rec:information-proof}
+
+We prove Theorem~\ref{rec:information} directly for ordinary integers.
+This avoids approximating a growing array of divisibility bits by
+independent prime bits. The upper bound asks how much information small
+primes can carry and how much the remaining primes can transmit through
+the noise. The lower bound temporarily reveals a small set of reference
+integers and uses them to identify many prime features of the others.
+
+\subsection{The prime sums and the conditioning principle}
+
+Write $h(t)=-t\log t-(1-t)\log(1-t)$, with its endpoint values defined
+by continuity, and put
+\[
+ S(y)=\sum_{p\le y}h(1/p),\qquad \rho_y=\sum_{p>y}p^{-2}.
+\]
+The classical prime estimates give, for $y\ge2$,
+\begin{equation}\label{rec:prime-estimates}
+ \begin{split}
+ S(y)&=\log y+\log\log y+O(1),\\
+ \sum_{p\le y}\frac{\log p}{p}&=\log y+O(1),\qquad
+ \sum_{p\le y}\log p=O(y),\qquad
+ \rho_y\ll\frac1{y\log y}.
+ \end{split}
+\end{equation}
+The first follows by expanding
+$h(1/p)=(\log p)/p+1/p+O(p^{-2})$ and using Mertens' sums.
+The last follows by partial summation from $\pi(y)\ll y/\log y$.
+These are classical estimates, with stronger explicit versions in
+Rosser and Schoenfeld~\cite{RecRosserSchoenfeld1962}; see also
+Mertens~\cite{RecMertens1874} for the prime sums.
+
+We shall use one elementary information inequality repeatedly. If $A$
+and $Z$ are any data determined by the hidden integers, then the channel
+noise is independent of them given $G=G_N$, so
+\begin{equation}\label{rec:oracle-information}
+ \begin{split}
+ I(G;Y)&=I(G,A;Y)
+       =I(A;Y)+I(G;Y\mid A)\\
+       &\ge I(G;Y\mid A)\ge I(Z;Y\mid A).
+ \end{split}
+\end{equation}
+The last step is conditional data processing. Thus reference values may
+be revealed \emph{in a proof of a lower bound} without claiming they
+were given to the actual decoder. This particular inequality depends
+on the conditional independence of the observation channel.
+
+\subsection{Upper bound: truncate the prime features}
+
+Reveal the array $B$ of prime-divisibility bits for all vertices and
+all $p\le y$. The bits of one integer are dependent, but entropy
+subadditivity still gives
+\begin{equation}\label{rec:bit-entropy}
+ H(B)\le N\sum_{p\le y}h\left(\frac{\lfloor X/p\rfloor}{X}\right)
+ \le NS(y),\qquad X=N^2.
+\end{equation}
+Here $h$ is increasing on $[0,1/2]$ and
+$\lfloor X/p\rfloor/X\le1/p\le1/2$.
+
+Given $B$, let $F_{ij}$ be the answer that uses only primes at most
+$y$. If $F_{ij}=0$, the clean answer is determined. If $F_{ij}=1$,
+the clean answer differs only if a prime above $y$ divides both hidden
+integers. The average probability of this event is at most $\rho_y$.
+
+First assume $|a_N|\le1/2$. The divergence between the two output laws
+for an edge is at most $4a_N^2$, as in the testing proof. For a binary
+input that differs from a fixed baseline with probability $r$, its
+mutual information through this channel is at most $4a_N^2r$.
+To verify this, compare the two output distributions with the baseline
+output law: the average divergence is $rD$, and subtracting the
+nonnegative divergence of the mixture from the baseline gives mutual
+information. Conditional entropy subadditivity across edges, together
+with independent noise given $G$, now yields
+\begin{equation}\label{rec:info-upper-cutoff}
+ I(G;Y)\le H(B)+I(G;Y\mid B)
+ \le NS(y)+4a_N^2\binom N2\rho_y.
+\end{equation}
+Only the averaged residual probability is used here; independence of
+prime divisibility for ordinary integers is unnecessary.
+
+If $T_N\ge2$, choose $y=T_N$. Equations
+\eqref{rec:prime-estimates} and \eqref{rec:info-upper-cutoff} give
+\[
+ I(G;Y)\le N\log T_N+N\log\log T_N+O(N).
+\]
+For bounded $T_N$, choosing $y=2$ instead gives $I(G;Y)=O(N)$,
+uniformly on each bounded range of $T_N$.
+
+If $|a_N|>1/2$, then $T_N>N/4$. We use a clean entropy bound. Reveal
+prime bits through $N$ and then record which edges differ from the
+truncated graph. Entropy subadditivity and concavity of $h$ give
+\begin{equation}\label{rec:clean-upper}
+ H(G)\le NS(N)+\binom N2h(\rho_N)
+ \le N\log N+N\log\log N+O(N),
+\end{equation}
+because $h(\rho_N)=O(N^{-1})$. Since $I(G;Y)\le H(G)$ and
+$\log(1+T_N)=\log N+O(1)$ in this regime, these estimates prove the
+upper half of \eqref{rec:information-law} for every noise rate.
+
+\subsection{Lower bound: reference integers reveal many small primes}
+
+Put $L=\log N$, $m=\lfloor N/L\rfloor$, and
+\begin{equation}\label{rec:reference-cutoff}
+ y=T_N/L^{12}.
+\end{equation}
+If $y<2$, then $\log(1+T_N)=O(\log\log N)$, and the required lower
+bound follows from $I(G;Y)\ge0$. Suppose henceforth $y\ge2$.
+Reveal the actual values of the first $m$ sampled integers, calling
+this reference data $A$. The remaining $N-m$ vertices are targets.
+
+For a target value $n$, call it good when $2^{\omega(n)}\le L^3$.
+The divisor identity $2^{\omega(n)}=\sum_{d\mid n}\mu(d)^2$ gives
+\[
+ \frac1X\sum_{n\le X}2^{\omega(n)}
+ \le\sum_{d\le X}\frac1d\le1+\log X.
+\]
+Thus a uniformly sampled target is bad with probability $O(L^{-2})$.
+For each prime $p\le y$, use all reference integers divisible by $p$.
+Let their number be $L_p$. It is binomial with mean at least $m/(2p)$.
+A Chernoff bound gives
+\begin{equation}\label{rec:reference-count}
+ \Prob(L_p<m/(4p))\le e^{-cm/p}
+\end{equation}
+for an absolute $c>0$ and all sufficiently large $N$.
+
+If $p\mid n$, every clean answer from this target to these references
+is zero. If $p\nmid n$ and $n$ is good, inclusion--exclusion gives
+\begin{align}
+ \#\{b\le X:p\mid b,\ (b,n)=1\}
+ &=\frac Xp D(n)+O(2^{\omega(n)})\notag\\
+ &\ge\frac X{pL^3}-L^3
+ \ge\frac X{2pL^3}.\label{rec:reference-separation}
+\end{align}
+We used $D(n)\ge2^{-\omega(n)}$ and
+$X/p\ge N L^{12}$, since $p\le T_N/L^{12}\le N/L^{12}$.
+Consequently a random reference conditioned to be divisible by $p$
+is coprime to this good $n$ with probability at least $1/(2L^3)$.
+
+Conditional on $n$ and on which reference indices are divisible by
+$p$, their values are independent and uniform over the multiples of
+$p$ in $[1,X]$. Their noisy answers are therefore independent. When
+$p\mid n$ their mean is $\varepsilon_N$; otherwise it is
+$\varepsilon_N+a_N\theta$, with $\theta\ge1/(2L^3)$ on good targets.
+Use the threshold $\varepsilon_N+a_N/(4L^3)$, reversing the comparison
+when $a_N<0$. The parameter is fixed in the probability law and may
+be used by this auxiliary estimator for the information lower bound.
+The reconstruction algorithm in Theorem~\ref{rec:threshold} does not
+require it.
+
+On the event in \eqref{rec:reference-count}, Hoeffding's inequality
+bounds the bit error on a good target by
+\begin{equation}\label{rec:reference-testing}
+ 2\exp\left(-c\frac{a_N^2L_p}{L^6}\right)
+ \le2\exp\left(-c\frac{T_N}{pL^7}\right)
+ \le2e^{-cL^5}.
+\end{equation}
+The count failure probability is smaller after modifying $c$.
+The independence calculation conditions on the reference divisibility
+indicators, \emph{not} on their full revealed values. We average over
+those values to obtain the displayed error bound. The resulting
+estimator is nevertheless a function of $(Y,A)$, as required in
+\eqref{rec:oracle-information}.
+
+Let $D_i^*=\prod_{p\le y,\ p\mid X_i}p$ be a target's truncated
+squarefree mask. Union-bound over the at most $N$ candidate primes.
+The probability of failing to recover the whole mask is
+\begin{equation}\label{rec:mask-error}
+ e_N=O(L^{-2})+O(Ne^{-cL^5}).
+\end{equation}
+There are at most $X$ possible masks, since each is an integer divisor
+of some number at most $X$. Replace an impossible estimate by 1. The
+usual error-flag proof of Fano's inequality gives
+\begin{equation}\label{rec:fano-mask}
+ H(D_i^*\mid Y,A)\le h(e_N)+e_N\log X=O(L^{-1}).
+\end{equation}
+For completeness, condition additionally on the indicator that the
+estimated mask is wrong. On a correct estimate there is no uncertainty;
+on an incorrect one there are at most $X$ choices. The entropy of the
+indicator is at most $h(e_N)$.
+
+There is a simple lower bound for the mask's own entropy. For every
+possible value $d$, $\Prob(D_i^*=d)\le\Prob(d\mid X_i)\le1/d$.
+Therefore, using \eqref{rec:prime-estimates},
+\begin{align}
+ H(D_i^*)&\ge\E\log D_i^*
+ =\sum_{p\le y}\log p\,\frac{\lfloor X/p\rfloor}{X}\notag\\
+ &\ge\sum_{p\le y}\frac{\log p}{p}
+       -\frac1X\sum_{p\le y}\log p
+ \ge\log y-O(1).\label{rec:mask-entropy}
+\end{align}
+The target masks are mutually independent and independent of $A$.
+Apply \eqref{rec:oracle-information} to their collection and subtract
+their conditional entropy using \eqref{rec:fano-mask}. We obtain
+\begin{align}
+ I(G;Y)&\ge (N-m)(\log y-O(1))-O(N/L)\notag\\
+ &\ge N\log T_N-12N\log\log N-O(N).\label{rec:info-lower}
+\end{align}
+Here $m\log y=O(N)$ because $y\le N$. Replacing $T_N$ by $1+T_N$
+costs $O(N)$ when $T_N\ge1$; for smaller $T_N$ the lower bound was
+already trivial. This proves \eqref{rec:information-law}. Finally
+take $\varepsilon_N=0$, so $Y=G$ and $T_N=N$, to obtain
+\eqref{rec:graph-entropy}. This derivation of the clean entropy uses
+no earlier graph-entropy theorem.
+
+The proof shows why the leading scale is logarithmic in $T_N$.
+The entropy in prime bits through $y$ is roughly $\log y$ per vertex,
+and reference testing accesses these bits up to $T_N$ with only
+logarithmic losses. The coefficient comes from arithmetic prime sums.
+General entropy behavior of random-free graph models is studied by
+Hatami and Norine~\cite{RecHatamiNorine2012}; graph mutual information
+and signal-dependent information laws have broader precedents in
+Skeja--Olhede~\cite{RecSkejaOlhede2024} and
+Deshpande--Abbe--Montanari~\cite{RecDeshpandeAbbeMontanari2015}.
+The assertion here is the specific finite, labelled coprimality law.
+
+
+\section{Proof of reconstruction without digit addresses}\label{rec:message-proof}
+
+\begin{proof}[Proof of Theorem~\ref{rec:message}]
+By Corollary~\ref{rec:profiles}, for each fixed $j$ we can form an
+estimated lane $\widehat L_j$ differing from
+$L_j=\{i:\lpf(X_i)=p_j\}$ at $o_{\Prob}(N)$ vertices. The exceptional
+value $X_i=1$ belongs to no lane. Ordinary residue counting and the
+law of large numbers give
+\begin{equation}\label{rec:lane-size}
+ \frac{|L_j|}{N}\longrightarrow
+ \delta_j=\frac1{p_j}\prod_{q<p_j}(1-1/q)>0.
+\end{equation}
+Use
+\begin{equation}\label{rec:lane-estimator}
+ \widehat h_j=\frac1{|\widehat L_j|}
+              \sum_{i\in\widehat L_j}\frac{1-2Z_i}{b_N},
+\end{equation}
+with a fixed default when the denominator vanishes.
+
+Conditional on the integers and edge noise, the reconstructed lane
+is fixed and the digit errors remain independent. Each summand in
+\eqref{rec:lane-estimator} has conditional mean $1-2x_g(X_i)$,
+whose absolute value is at most one, and conditional variance at
+most $b_N^{-2}$. Equations \eqref{rec:lane-size} and $Nb_N^2\to\infty$
+make the centered error $o_{\Prob}(1)$. Replacing the estimated lane
+by the true lane in the \emph{conditional mean} costs only
+$o_{\Prob}(1)$. No division of this replacement error by $|b_N|$
+is needed.
+
+The average Liouville sign in each fixed lane tends to zero. To spell
+out the classical input, write $Q_j=\prod_{q<p_j}q$ and
+$L(t)=\sum_{n\le t}\lambda(n)=o(t)$, the prime number theorem in
+its Liouville form. Inclusion--exclusion and complete multiplicativity
+give
+\[
+ \sum_{m\le t,\ (m,Q_j)=1}\lambda(m)
+ =\sum_{d\mid Q_j}\mu(d)\lambda(d)L(t/d)
+ =\sum_{d\mid Q_j}L(t/d)=o(t).
+\]
+The least-prime lane consists of $p_jm$ with $(m,Q_j)=1$; multiplication
+by $p_j$ reverses the sign. This proves that its finite-range mean
+of $1-2x_g(n)$ tends to $1-g_j$. The independently sampled lane
+average has the same limit by bounded-variance concentration and
+\eqref{rec:lane-size}. Thus $\widehat h_j\to1-g_j$ in probability.
+Rounding at $1/2$ recovers the bit. A union bound recovers any fixed
+finite prefix of mask bits.
+
+Define, with arbitrary binary defaults where needed,
+\[
+ \widehat C_N=\sum_{n=2}^N
+ \frac{1-\lambda(n)}2\widehat g_{\ell(n),N}\,2^{-n}.
+\]
+For every fixed $M$, the first $M$ digits are correct with probability
+tending to one; the remaining tail is at most $2^{-M}$. First taking
+$N\to\infty$ and then $M\to\infty$ proves convergence to $C_g$.
+
+For necessity of the digit condition, compare two fixed masks differing
+only at some $j\ge2$. Supply an oracle with the exact integers, every
+other mask bit, and both noise probabilities. The two hypotheses
+differ at at most $N$ digit observations. On a subsequence where
+$Nb_N^2$ is bounded, their total conditional relative entropy is
+at most $4Nb_N^2$ eventually. The testing bound used in
+\eqref{rec:testing-lower} leaves positive error under at least one
+mask. Thus one procedure cannot be consistent for both.
+
+For the edge condition, use the all-one mask. The earlier pair
+$u,2u$ has opposite Liouville signs, so it would be distinguished by
+a clean digit label. Instead use the disjoint pairs
+$\{u,4u\}$ with $u$ odd and $u\le N^2/4$. Their union has probability
+$1/4+o(1)$, and the two values have exactly the same Liouville sign.
+Reveal the base and every other hidden integer and require the partner
+to be even. This event has probability $1/8+o(1)$ and leaves a fair
+bit that changes membership of 2 in $R_{ij}$ but changes no digit
+observation law. The incident edges again have total divergence at
+most $4Na_N^2$. On a bounded-$Na_N^2$ subsequence the fixed-pair error
+is bounded away from zero, uniformly over pairs, which also excludes
+a vanishing error fraction. This proves the joint necessity statement.
+\end{proof}

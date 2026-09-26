@@ -1,0 +1,207 @@
+\subsection{What the growth and zeros count}
+\label{grw:section}
+
+The operator behind $\Psi_g$ controls the location of its zeros.
+The companion $\Phi_g$ records how quickly disabled lanes accumulate.
+If those primes grow sparse, the function grows slowly; if they grow
+more numerous, it grows faster.  For the Goldbach member this comparison
+also turns the conjecture into a statement about complex zeros.
+
+Put $a_k=M_k(g)/k!$ and $B_g(R)=\#(\mathcal F\cap[2,R])$.
+If all $k$ labels in the prime-assignment model of
+Proposition~\ref{fnd:moment-positivity} are masked, their first
+assigned primes are $k$ distinct members of $\mathcal F$.
+For a chosen set of $k$ primes, sum over its $k!$ assignments to the
+labels and discard the first-assignment restrictions.  Independence
+between primes gives the useful bound
+\begin{equation}
+ a_k\le e_k\left(\frac1{p+k-1}:p\in\mathcal F\right)
+ \le e_k\left(\frac1p:p\in\mathcal F\right),
+ \label{grw:coefficient-majorant}
+\end{equation}
+Here $e_k$ means the sum of products over all $k$-element subsets; for
+example $e_2(w)=\sum_{p<q}w_pw_q$.  Thus, when
+$\sum_{p\in\mathcal F}1/p<\infty$,
+\begin{equation}
+ |\Phi_g(z)|\le\Phi_g(|z|)
+ \le P_{\mathcal F}(|z|):=
+       \prod_{p\in\mathcal F}(1+|z|/p).
+ \label{grw:majorant}
+\end{equation}
+The product bounds the function from above.  Its factors are not being
+identified with the zeros of $\Phi_g$.
+
+The \emph{order} of an entire function records the power in its
+exponential growth: roughly, growth like $\exp(r^\alpha)$ on disks of
+radius $r$ gives order $\alpha$.  The following theorem matches that
+analytic exponent with a counting exponent for the disabled primes.
+
+\begin{theorem}[Counting exponent and entire-function order]
+\label{grw:order}
+Suppose the disabled-prime counting exponent
+\[
+ \eta_g=\limsup_{R\to\infty}
+ \frac{\log\max(1,B_g(R))}{\log R}
+\]
+is strictly less than one.  Then $\Phi_g$ has order exactly $\eta_g$.
+Formally the order is the limsup of $\log\log \max_{|z|\le r}|\Phi_g(z)|$
+divided by $\log r$; constants and polynomials have order zero by convention.  For the actual
+Goldbach mask,
+\begin{equation}
+ \operatorname{ord}\Phi_{\Gold}
+ =\limsup_{Y\to\infty}\frac{\log\max(1,E(Y))}{\log Y}
+ \le\frac{18}{25},
+ \label{grw:goldbach-order}
+\end{equation}
+and, as $r\to\infty$,
+\begin{equation}
+ \log\max_{|z|\le r}|\Phi_{\Gold}(z)|
+ =\log\Phi_{\Gold}(r)\ll(r/\log r)^{18/25}.
+ \label{grw:quantitative-growth}
+\end{equation}
+In particular, for an absolute constant $C$ and $k\ge2$,
+\begin{equation}
+ M_k(\Gold)\le
+ \left(\frac{C}{k^{7/18}\log(k+1)}\right)^k.
+ \label{grw:moment-bound}
+\end{equation}
+\end{theorem}
+The proof is in Appendix~\ref{grw:proofs}.  Its two estimates have
+opposite roles.  Summing over every possible set of disabled primes
+bounds the function from above.  Requiring the first $k$ disabled
+primes to hit distinct labels supplies a matching lower bound on its
+order.  The analytic exponent therefore cannot lose the arithmetic
+counting exponent.
+
+
+\begin{corollary}[Zeros count the exceptions]\label{grw:zeros}
+Under the hypothesis of Theorem~\ref{grw:order}, list the zeros
+of $\Phi_g$ with multiplicity as $(\zeta_j)$.  Then
+\begin{equation}
+ \Phi_g(z)=\prod_j(1-z/\zeta_j),\qquad
+ \sum_j|\zeta_j|^{-1}<\infty,\qquad
+ \sum_j\zeta_j^{-1}=-S_g.
+ \label{grw:factorization}
+\end{equation}
+Counting multiplicity, the number of zeros equals the number of
+disabled lanes, allowing infinity.
+If $n_g(R)$ counts the zeros in $|z|\le R$, with multiplicity, then
+\begin{equation}
+ \limsup_{R\to\infty}
+ \frac{\log\max(1,n_g(R))}{\log R}=\eta_g.
+ \label{grw:zero-exponent}
+\end{equation}
+For the actual Goldbach function,
+\[
+ \GC\ \Longleftrightarrow\ \Phi_{\Gold}\text{ has no complex zeros},
+ \qquad n_{\Gold}(R)\ll(R/\log R)^{18/25}.
+\]
+If there are infinitely many exceptions, every complex value is
+attained by $\Phi_{\Gold}$ infinitely often.
+\end{corollary}
+\begin{proof}
+Hadamard's factorization theorem \cite{sampHadamard1893} says that
+an entire function of order less than one has a genus-zero product
+and a constant exponential prefactor.  Since $\Phi_g(0)=1$, this
+gives the first two assertions of \eqref{grw:factorization};
+differentiation at zero gives its last assertion because
+$\Phi_g'(0)=M_1(g)=S_g$.  For a finite mask the polynomial degree
+is $\#\mathcal F$.  For an infinite mask all coefficients are
+positive, so the function is not a polynomial; the factorization
+then forces infinitely many zeros.  The same argument applied to
+$\Phi_g-w$ shows infinite attainment of each $w\in\mathbb C$
+when the mask is infinite.
+
+Jensen's formula and $\Phi_g(0)=1$ give
+$n_g(R)\log2\le\log\Phi_g(2R)$, which bounds the zero-counting
+exponent by $\eta_g$ and gives the displayed quantitative estimate.
+Conversely, if that exponent were $\lambda<\eta_g$, choose
+$\lambda<\beta<\eta_g<1$.  The product
+\eqref{grw:factorization}, together with
+$n_g(t)\ll_\beta t^\beta$, implies
+\[
+ \log\max_{|z|\le r}|\Phi_g(z)|
+ \le\sum_j\log(1+r/|\zeta_j|)=O_\beta(r^\beta)
+\]
+by the same integration used in \eqref{grw:stieltjes}, starting
+below the smallest zero modulus.  This contradicts its order.
+The zero-order case follows from the upper bound and nonnegativity.
+\end{proof}
+
+These are zeros of the mask function.  The worked example above shows
+that they can be nonreal.  The sparsity hypothesis is essential to the
+factorization argument.
+Also, order zero alone does not mean finitely many exceptions: an
+infinite mask with subpower counting function has the same order.
+The improved moment estimate measures a statistic of our
+construction; it does not improve the imported bound for $E(Y)$.
+
+\subsection{One bias can hide infinitely many changes}
+\label{grw:collision-section}
+
+There is a sharp reason to keep the higher correlations rather
+than only the proportion of zero digits.  Put
+$\delta_p=p^{-1}\prod_{q<p}(1-1/q)$, so
+$S_g=\sum_{p\in\mathcal F}\delta_p$.
+
+\begin{proposition}\label{grw:bias-collision}
+Among masks known to have finitely many disabled lanes, the exact bias $S_g$ determines the mask.
+Nevertheless, for every sufficiently large prime $p$, there is an
+infinite set $\mathcal H=\{q_1<q_2<\cdots\}$ of primes greater than
+$p$ such that
+\begin{equation}
+ \sum_{q\in\mathcal H}\delta_q=\delta_p,\qquad
+ q_{j+1}/q_j\longrightarrow\infty,
+ \qquad \#(\mathcal H\cap[2,R])=o(\log R).
+ \label{grw:collision}
+\end{equation}
+Thus two masks can have exactly the same digit bias while one has
+one disabled lane and the other has infinitely many.
+\end{proposition}
+\begin{proof}
+If $P$ is the largest prime of a finite nonempty mask, then
+$\delta_P$ has $P$-adic valuation $-1$: its numerator contains only
+factors $q-1<P$, and its denominator is the primorial through $P$.
+Every earlier $\delta_q$ has nonnegative $P$-adic valuation.
+Consequently $P$ is the largest prime dividing the reduced
+denominator of $S_g$.  Recover $P$, subtract $\delta_P$, and repeat.
+
+List all primes as $p_i$ and set $d_i=\delta_{p_i}$.  These weights
+decrease strictly to zero and
+\[
+ d_i/d_{i+1}=p_{i+1}/(p_i-1)\longrightarrow1
+\]
+by the prime number theorem.  Choose $p$ beyond a point where every
+consecutive ratio is less than two.  Starting with residual
+$r_0=\delta_p$, repeatedly subtract the largest weight at a prime
+greater than $p$ which does not exceed the residual.
+The first choice is the successor of $p$.  If $q$ is a later
+choice and $q^-$ its immediate prime predecessor, the residual
+after subtraction satisfies
+\[
+ 0\le r_{\mathrm{new}}
+ \le\delta_{q^-}-\delta_q=o(\delta_q).
+\]
+The ratio bound makes $r_{\mathrm{new}}<\delta_q$, so no weight is
+used twice and selected primes strictly increase.  The process
+cannot terminate: a finite sum at primes greater than $p$ has a
+reduced denominator containing its largest prime, unlike
+$\delta_p$.  It therefore makes infinitely many selections, and
+$r_j<\delta_{q_j}\to0$ proves the sum identity.
+
+The next selected weight is at most the preceding residual, hence
+$\delta_{q_{j+1}}/\delta_{q_j}\to0$.  Mertens' product estimate
+$\delta_q\sim e^{-\gamma}/(q\log q)$ forces
+$q_{j+1}/q_j\to\infty$.  For any fixed $C>1$, these ratios
+eventually exceed $C$, so the counting function is at most
+$\log R/\log C+O_C(1)$.  Letting $C$ tend to infinity proves
+\eqref{grw:collision}.
+\end{proof}
+
+The equality is exact, so it survives arbitrarily accurate measurement
+of the digit frequency.  For these two masks $\Phi_g'(0)$ agrees,
+but their functions are
+respectively linear and transcendental entire.  The second has
+order zero and infinitely many zeros by the preceding results.
+This is an example within the mask family; it asserts no actual
+Goldbach exception, and no collision between the whole functions.

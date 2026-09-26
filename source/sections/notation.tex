@@ -1,0 +1,46 @@
+\section*{Symbols at a glance}
+\phantomsection
+\addcontentsline{toc}{section}{Symbols at a glance}
+\label{app:notation}
+
+Each object is introduced where it first appears; this page is a place
+to return to. Here $p_j$ is the $j$th prime. The lane of $p$ consists
+of integers whose least prime factor is $p$.
+
+\renewcommand{\arraystretch}{1.35}
+\begin{longtable}{@{}p{.23\linewidth}p{.72\linewidth}@{}}
+\toprule
+Symbol & Meaning \\
+\midrule
+\endhead
+$\Gold$ & The original Goldbach constant. \\
+$C_g$ & A constant carrying a binary message $g$:
+$g_j=0$ closes the lane of $p_j$; $g_j=1$ opens it. \\
+$x_g(n)$ & The $n$th binary digit of $C_g$. \\
+$\ell(n)$ & For $n\ge2$, the index of its least prime factor:
+$\lpf(n)=p_{\ell(n)}$. \\
+$\lambda(n)$ & The Liouville sign, $(-1)^{\Omega(n)}$;
+$\Omega$ counts prime factors with multiplicity. \\
+$\delta_j$ & The density of positions in the lane of $p_j$. \\
+$S_g$ & The total density of disabled lanes. \\
+$M_k(g)$ & The correlation of $k$ signs $1-2x_g(n)$, conditioned on pairwise coprime digit positions. \\
+$K(k)$ & The limiting probability that $k$ sampled integers are pairwise coprime. \\
+$\Phi_g,\Psi_g$ & The generating functions for conditioned and unconditioned correlations, respectively. \\
+$W,\Comp$ & Independent prime and composite random factors;
+$W\Comp$ has the exponential law of mean one. \\
+$f,\SymCDF$ & The density of $W$ on $(0,\infty)$, extended to the complex plane,
+and the symmetric cumulative distribution function derived from it. \\
+$G_g$ & The cumulative distribution function from sampling equally spaced
+digit positions with coprime start and step. \\
+$G_N,Y_N$ & The clean and observed labelled coprimality tables in the finite recovery experiment. \\
+$T_N$ & Effective signal $N(1-2\varepsilon_N)^2$, where $\varepsilon_N$
+is the probability of flipping each pair answer. \\
+$D(n)$ & The effective count of prime-power parts $p^{v_p(n)}$,
+measured by the entropy of their logarithmic shares. \\
+$B_k$ & The set of primes still present after deletion round $k$. \\
+\bottomrule
+\end{longtable}
+\renewcommand{\arraystretch}{1}
+
+\noindent All logarithms are natural unless a base is specified.
+Local cutoff variables are defined where used.

@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="520.25pt" height="212.541pt" viewBox="0 0 520.25 212.541" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-09-25T08:26:02.050221</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 212.541 
+L 520.25 212.541 
+L 520.25 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 37.85 146.325 
+L 240.062766 146.325 
+L 240.062766 52.725 
+L 37.85 52.725 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1"/>
+     <g id="text_1">
+      <text style="font-size: 10px; font-family: 'STIX Two Text'; text-anchor: middle" x="45.395252" y="157.445" transform="rotate(-0 45.395252 157.445)">−24</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2"/>
+     <g id="text_2">
+      <text style="font-size: 10px; font-family: 'STIX Two Text'; text-anchor: middle" x="105.757272" y="157.445" transform="rotate(-0 105.757272 157.445)">−16</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3"/>
+     <g id="text_3">
+      <text style="font-size: 10px; font-family: 'STIX Two Text'; text-anchor: middle" x="166.119292" y="157.445" transform="rotate(-0 166.119292 157.445)">−8</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4"/>
+     <g id="text_4">
+      <text style="font-size: 10px; font-family: 'STIX Two Text'; text-anchor: middle" x="226.481312" y="157.445" transform="rotate(-0 226.481312 157.445)">0</text>
+     </g>
+    </g>
+    <g id="text_5">
+     <text style="font-size: 11px; font-family: 'STIX Two Text'; text-anchor: middle" x="138.956383" y="172.207" transform="rotate(-0 138.956383 172.207)">Real part</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_5"/>
+     <g id="text_6">
+      <text style="font-size: 10px; font-family: 'STIX Two Text'; text-anchor: end" x="34.35" y="145.880455" transform="rotate(-0 34.35 145.880455)">−2</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_6"/>
+     <g id="text_7">
+      <text style="font-size: 10px; font-family: 'STIX Two Text'; text-anchor: end" x="34.35" y="103.335" transform="rotate(-0 34.35 103.335)">0</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_7"/>
+     <g id="text_8">
+      <text style="font-size: 10px; font-family: 'STIX Two Text'; text-anchor: end" x="34.35" y="60.789545" transform="rotate(-0 34.35 60.789545)">2</text>
+     </g>
+    </g>
+    <g id="text_9">
+     <text style="font-size: 11px; font-family: 'STIX Two Text'; text-anchor: middle" x="15.582" y="99.525" transform="rotate(-90 15.582 99.525)">Imaginary part</text>
+    </g>
+   </g>
+   <g id="line2d_8">
+    <path d="M 37.85 99.525 
+L 240.062766 99.525 
+" clip-path="url(#p300dc626da)" style="fill: none; stroke: #89929b; stroke-width: 0.75; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_9">
+    <path d="M 226.481312 146.325 
+L 226.481312 52.725 
+" clip-path="url(#p300dc626da)" style="fill: none; stroke: #89929b; stroke-width: 0.75; stroke-linecap: square"/>
+   </g>
+   <g id="text_10">
+    <!-- $\Phi_g(z)=1+\frac{7}{30}z+\frac{1}{72}z^2$ -->
+    <g transform="translate(81.301383 41.883)">
+     <text>
+      <tspan x="0" y="-0.484125" style="font-size: 13px; font-family: 'STIXGeneral'">Φ</tspan>
+      <tspan x="15.258756" y="-0.484125" style="font-size: 13px; font-family: 'STIXGeneral'">(</tspan>
+      <tspan x="24.644773" y="-0.484125" style="font-size: 13px; font-family: 'STIXGeneral'">)</tspan>
+      <tspan x="31.573783" y="-0.484125" style="font-size: 13px; font-family: 'STIXGeneral'">=</tspan>
+      <tspan x="43.078797" y="-0.484125" style="font-size: 13px; font-family: 'STIXGeneral'">1</tspan>
+      <tspan x="52.178797" y="-0.484125" style="font-size: 13px; font-family: 'STIXGeneral'">+</tspan>
+      <tspan x="82.065818" y="-0.484125" style="font-size: 13px; font-family: 'STIXGeneral'">+</tspan>
+      <tspan x="10.123756" y="1.465875" style="font-style: italic; font-size: 9.1px; font-family: 'STIXGeneral'">g</tspan>
+      <tspan x="19.587766" y="-0.484125" style="font-style: italic; font-size: 13px; font-family: 'STIXGeneral'">z</tspan>
+      <tspan x="74.408811" y="-0.484125" style="font-style: italic; font-size: 13px; font-family: 'STIXGeneral'">z</tspan>
+      <tspan x="104.295832" y="-0.484125" style="font-style: italic; font-size: 13px; font-family: 'STIXGeneral'">z</tspan>
+      <tspan x="64.496311" y="3.6315" style="font-size: 9.1px; font-family: 'STIXGeneral'">3</tspan>
+      <tspan x="66.496311" y="-5.029437" style="font-size: 9.1px; font-family: 'STIXGeneral'">7</tspan>
+      <tspan x="69.046311" y="3.6315" style="font-size: 9.1px; font-family: 'STIXGeneral'">0</tspan>
+      <tspan x="94.383332" y="3.6315" style="font-size: 9.1px; font-family: 'STIXGeneral'">7</tspan>
+      <tspan x="96.383332" y="-4.952875" style="font-size: 9.1px; font-family: 'STIXGeneral'">1</tspan>
+      <tspan x="98.933332" y="3.6315" style="font-size: 9.1px; font-family: 'STIXGeneral'">2</tspan>
+      <tspan x="110.111464" y="-5.853125" style="font-size: 9.1px; font-family: 'STIXGeneral'">2</tspan>
+     </text>
+     <rect x="64.496311" y="-4.327875" width="9.1" height="0.8125"/>
+     <rect x="94.383332" y="-4.327875" width="9.1" height="0.8125"/>
+    </g>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 12px; font-family: 'STIX Two Text'; text-anchor: middle; fill: #b35732" x="138.956383" y="202.485" transform="rotate(-0 138.956383 202.485)">Two nonreal zeros</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 12.5px; font-family: 'STIX Two Text'; text-anchor: middle; fill: #202a34" x="138.956383" y="16.725" transform="rotate(-0 138.956383 16.725)">Condition on coprimality</text>
+   </g>
+   <g id="PathCollection_1">
+    <defs>
+     <path id="m3c9074963e" d="M 0 4.472136 
+C 1.186024 4.472136 2.323632 4.000923 3.162278 3.162278 
+C 4.000923 2.323632 4.472136 1.186024 4.472136 0 
+C 4.472136 -1.186024 4.000923 -2.323632 3.162278 -3.162278 
+C 2.323632 -4.000923 1.186024 -4.472136 0 -4.472136 
+C -1.186024 -4.472136 -2.323632 -4.000923 -3.162278 -3.162278 
+C -4.000923 -2.323632 -4.472136 -1.186024 -4.472136 0 
+C -4.472136 1.186024 -4.000923 2.323632 -3.162278 3.162278 
+C -2.323632 4.000923 -1.186024 4.472136 0 4.472136 
+z
+" style="stroke: #b35732"/>
+    </defs>
+    <g clip-path="url(#p300dc626da)">
+     <use xlink:href="#m3c9074963e" x="163.101191" y="73.997727" style="fill: #b35732; stroke: #b35732"/>
+     <use xlink:href="#m3c9074963e" x="163.101191" y="125.052273" style="fill: #b35732; stroke: #b35732"/>
+    </g>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_3">
+    <path d="M 310.837234 146.325 
+L 513.05 146.325 
+L 513.05 52.725 
+L 310.837234 52.725 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_3">
+    <g id="xtick_5">
+     <g id="line2d_10"/>
+     <g id="text_13">
+      <text style="font-size: 10px; font-family: 'STIX Two Text'; text-anchor: middle" x="318.382487" y="157.445" transform="rotate(-0 318.382487 157.445)">−24</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_11"/>
+     <g id="text_14">
+      <text style="font-size: 10px; font-family: 'STIX Two Text'; text-anchor: middle" x="378.744506" y="157.445" transform="rotate(-0 378.744506 157.445)">−16</text>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_12"/>
+     <g id="text_15">
+      <text style="font-size: 10px; font-family: 'STIX Two Text'; text-anchor: middle" x="439.106526" y="157.445" transform="rotate(-0 439.106526 157.445)">−8</text>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_13"/>
+     <g id="text_16">
+      <text style="font-size: 10px; font-family: 'STIX Two Text'; text-anchor: middle" x="499.468546" y="157.445" transform="rotate(-0 499.468546 157.445)">0</text>
+     </g>
+    </g>
+    <g id="text_17">
+     <text style="font-size: 11px; font-family: 'STIX Two Text'; text-anchor: middle" x="411.943617" y="172.207" transform="rotate(-0 411.943617 172.207)">Real part</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_4">
+    <g id="ytick_4">
+     <g id="line2d_14"/>
+     <g id="text_18">
+      <text style="font-size: 10px; font-family: 'STIX Two Text'; text-anchor: end" x="307.337234" y="145.880455" transform="rotate(-0 307.337234 145.880455)">−2</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_15"/>
+     <g id="text_19">
+      <text style="font-size: 10px; font-family: 'STIX Two Text'; text-anchor: end" x="307.337234" y="103.335" transform="rotate(-0 307.337234 103.335)">0</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_16"/>
+     <g id="text_20">
+      <text style="font-size: 10px; font-family: 'STIX Two Text'; text-anchor: end" x="307.337234" y="60.789545" transform="rotate(-0 307.337234 60.789545)">2</text>
+     </g>
+    </g>
+   </g>
+   <g id="line2d_17">
+    <path d="M 310.837234 99.525 
+L 513.05 99.525 
+" clip-path="url(#p4fc801280e)" style="fill: none; stroke: #89929b; stroke-width: 0.75; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_18">
+    <path d="M 499.468546 146.325 
+L 499.468546 52.725 
+" clip-path="url(#p4fc801280e)" style="fill: none; stroke: #89929b; stroke-width: 0.75; stroke-linecap: square"/>
+   </g>
+   <g id="text_21">
+    <!-- $\Psi_g(z)=1+\frac{7}{30}z+\frac{1}{12\pi^2}z^2$ -->
+    <g transform="translate(350.063617 39.933)">
+     <text>
+      <tspan x="0" y="-0.484125" style="font-size: 13px; font-family: 'STIXGeneral'">Ψ</tspan>
+      <tspan x="15.037763" y="-0.484125" style="font-size: 13px; font-family: 'STIXGeneral'">(</tspan>
+      <tspan x="24.42378" y="-0.484125" style="font-size: 13px; font-family: 'STIXGeneral'">)</tspan>
+      <tspan x="31.35279" y="-0.484125" style="font-size: 13px; font-family: 'STIXGeneral'">=</tspan>
+      <tspan x="42.857804" y="-0.484125" style="font-size: 13px; font-family: 'STIXGeneral'">1</tspan>
+      <tspan x="51.957804" y="-0.484125" style="font-size: 13px; font-family: 'STIXGeneral'">+</tspan>
+      <tspan x="81.844825" y="-0.484125" style="font-size: 13px; font-family: 'STIXGeneral'">+</tspan>
+      <tspan x="9.902763" y="1.465875" style="font-style: italic; font-size: 9.1px; font-family: 'STIXGeneral'">g</tspan>
+      <tspan x="103.262339" y="5.545738" style="font-style: italic; font-size: 9.1px; font-family: 'STIXGeneral'">π</tspan>
+      <tspan x="19.366773" y="-0.484125" style="font-style: italic; font-size: 13px; font-family: 'STIXGeneral'">z</tspan>
+      <tspan x="74.187818" y="-0.484125" style="font-style: italic; font-size: 13px; font-family: 'STIXGeneral'">z</tspan>
+      <tspan x="112.786778" y="-0.484125" style="font-style: italic; font-size: 13px; font-family: 'STIXGeneral'">z</tspan>
+      <tspan x="64.275318" y="3.6315" style="font-size: 9.1px; font-family: 'STIXGeneral'">3</tspan>
+      <tspan x="66.275318" y="-5.029437" style="font-size: 9.1px; font-family: 'STIXGeneral'">7</tspan>
+      <tspan x="68.825318" y="3.6315" style="font-size: 9.1px; font-family: 'STIXGeneral'">0</tspan>
+      <tspan x="94.162339" y="5.545738" style="font-size: 9.1px; font-family: 'STIXGeneral'">1</tspan>
+      <tspan x="98.712339" y="5.545738" style="font-size: 9.1px; font-family: 'STIXGeneral'">2</tspan>
+      <tspan x="101.162339" y="-4.952875" style="font-size: 9.1px; font-family: 'STIXGeneral'">1</tspan>
+      <tspan x="118.60241" y="-5.853125" style="font-size: 9.1px; font-family: 'STIXGeneral'">2</tspan>
+      <tspan x="108.379778" y="1.787437" style="font-size: 6.37px; font-family: 'STIXGeneral'">2</tspan>
+     </text>
+     <rect x="64.275318" y="-4.327875" width="9.1" height="0.8125"/>
+     <rect x="94.162339" y="-4.327875" width="17.811939" height="0.8125"/>
+    </g>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 12px; font-family: 'STIX Two Text'; text-anchor: middle; fill: #167b80" x="411.943617" y="202.485" transform="rotate(-0 411.943617 202.485)">Two negative real zeros</text>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 12.5px; font-family: 'STIX Two Text'; text-anchor: middle; fill: #202a34" x="411.943617" y="16.725" transform="rotate(-0 411.943617 16.725)">Average over all tuples</text>
+   </g>
+   <g id="PathCollection_2">
+    <defs>
+     <path id="m3cd891c642" d="M 0 4.472136 
+C 1.186024 4.472136 2.323632 4.000923 3.162278 3.162278 
+C 4.000923 2.323632 4.472136 1.186024 4.472136 0 
+C 4.472136 -1.186024 4.000923 -2.323632 3.162278 -3.162278 
+C 2.323632 -4.000923 1.186024 -4.472136 0 -4.472136 
+C -1.186024 -4.472136 -2.323632 -4.000923 -3.162278 -3.162278 
+C -4.000923 -2.323632 -4.472136 -1.186024 -4.472136 0 
+C -4.472136 1.186024 -4.000923 2.323632 -3.162278 3.162278 
+C -2.323632 4.000923 -1.186024 4.472136 0 4.472136 
+z
+" style="stroke: #167b80"/>
+    </defs>
+    <g clip-path="url(#p4fc801280e)">
+     <use xlink:href="#m3cd891c642" x="330.972869" y="99.525" style="fill: #167b80; stroke: #167b80"/>
+     <use xlink:href="#m3cd891c642" x="459.451983" y="99.525" style="fill: #167b80; stroke: #167b80"/>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p300dc626da">
+   <rect x="37.85" y="52.725" width="202.212766" height="93.6"/>
+  </clipPath>
+  <clipPath id="p4fc801280e">
+   <rect x="310.837234" y="52.725" width="202.212766" height="93.6"/>
+  </clipPath>
+ </defs>
+</svg>

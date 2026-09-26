@@ -1,0 +1,5 @@
+# Optional: illustrations and numerical calculations only.
+# The LaTeX build does not use Python.
+numpy
+matplotlib
+mpmath

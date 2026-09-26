@@ -1,0 +1,115 @@
+\section{A staircase made by sampling the digits}
+\label{samp:section}
+
+Reading the digits at equally spaced positions gives another real number:
+\[
+ Y_g(a,d)=\sum_{j\ge0}x_g(a+jd)2^{-j-1}.
+\]
+Now choose the starting point $a$ and the step $d$ uniformly from
+$1,\ldots,N$, subject to $\gcd(a,d)=1$.  This last restriction prevents
+the entire progression from being trapped in a common prime lane.
+Let $\nu_{g,N}$ be the distribution of $Y_g(a,d)$.  Its limiting
+distribution gives a curve that rises across every interval, even in
+examples where its derivative is zero almost everywhere.  The apparent
+contradiction disappears once we distinguish total rise from the slope
+at a typical point.
+
+Write $\mathcal F=\{p_j:g_j=0\}$ for the disabled primes.  The hypothesis
+needed below says that the successful primes retain a divergent
+reciprocal sum:
+\begin{equation}
+ \sum_{p\notin\mathcal F}\frac1p=\infty.
+ \label{samp:success-hypothesis}
+\end{equation}
+It holds unconditionally for the actual Goldbach mask.  Indeed, let
+$E(Y)$ count even Goldbach exceptions in $[4,Y]$ and let
+$A(R)=\#(\mathcal F\cap[2,R])$.  Pintz's Theorem~1
+\cite{sampPintz2018} states that $E(Y)<Y^{18/25}$ beyond an
+ineffective threshold.  The prime number theorem therefore gives
+\begin{equation}
+ A(R)=E\bigl(2(\pi(R)+1)\bigr)
+ \ll (R/\log R)^{18/25} \quad(R\ge3).
+ \label{samp:pintz}
+\end{equation}
+Partial summation shows $\sum_{p\in\mathcal F}1/p<\infty$, whereas
+the sum over all primes diverges.  We use this established estimate
+as an input.  Its precise exponent is useful later; here any power
+strictly smaller than one would suffice.
+
+\begin{theorem}[Primitive sampling]\label{samp:staircase}
+Assume \eqref{samp:success-hypothesis}.  Then $\nu_{g,N}$ converges
+weakly to a nonatomic probability measure $\nu_g$ of full support
+$[0,1]$ and Hausdorff dimension one.  Its Lebesgue decomposition is
+\begin{equation}
+ \nu_g=L_g\,\mathrm{Leb}+\nu_{g,\mathrm{sc}},\qquad
+ L_g=\prod_{p\in\mathcal F}\frac1{p+1},
+ \label{samp:decomposition}
+\end{equation}
+where $\nu_{g,\mathrm{sc}}$ is singular continuous.  The empty product
+is one; an infinite product here is zero.  Consequently
+\[
+ G_g(y):=\nu_g([0,y])\quad(0\le y\le1)
+\]
+is a homeomorphism of $[0,1]$ onto itself and
+$G_g'(y)=L_g$ for Lebesgue-almost every $y$.
+\end{theorem}
+
+Full support means that every nonempty open interval receives positive
+probability.  Singular means that a set of ordinary length zero carries
+the measure.  Dimension one means that every set carrying its full mass
+has Hausdorff dimension one.  These properties can coexist: small in
+length need not mean small in dimension.  We do not claim that the
+measure has the same local dimension at almost every point.
+
+The mechanism is easier to see than the full convergence proof.
+Choose, independently at every prime $p$, a residue pair $(U,V)\bmod p$
+uniformly among the $p^2-1$ pairs other than $(0,0)$.  These simultaneous
+residues are a primitive profinite pair.  Independently choose fair
+bits $B_0,B_1,\ldots$.  The limiting sampled real has the law of
+\[
+ Z_g=\sum_{j\ge0}\bigl(1-h_g(U+jV)\bigr)B_j2^{-j-1}.
+\]
+Thus an open lane contributes a fair bit and a disabled lane contributes
+zero.  This is a theorem about the average over starting points and
+steps; it does not assume that the original consecutive digits are
+independent.
+
+A lane $p$ is visited precisely when $p$ does not divide $V$.  The
+probability that it is avoided is $1/(p+1)$.  Consequently every bit is
+free precisely on an event of probability $L_g$; that event supplies the
+uniform part of the measure.  Once a disabled lane is visited, zeros
+repeat on an infinite arithmetic progression.  Such digit strings form
+a single Lebesgue-null set, which carries the remaining part.
+
+This explains the decomposition and its product formula.  Full support
+comes from making any finite prefix open by finitely many compatible
+congruences.  Full dimension requires an additional limiting argument:
+there are positive portions of the law with a proportion of free bits
+arbitrarily close to one.  The complete proof, including the
+Frantzikinakis--Host variable-step cancellation that produces the fair
+bits, is in Appendix~\ref{samp:proofs}.
+
+
+\begin{corollary}\label{samp:goldbach-trichotomy}
+For the original Goldbach constant, $G_{\Gold}$ is the identity if and
+only if Goldbach holds.  If there are finitely many exceptions and at least one, then
+\[
+ G_{\Gold}'(y)=\frac1{\prod_{p\in\mathcal F}(p+1)}\in(0,1)
+ \quad\hbox{almost everywhere}.
+\]
+There are infinitely many Goldbach exceptions if and only if
+$G_{\Gold}'=0$ almost everywhere.  In this last case $G_{\Gold}$ is a singular
+homeomorphism whose associated measure has dimension one.
+\end{corollary}
+
+This phenomenon also has an unconditional explicit example.  Disable
+exactly the lanes
+\begin{equation}
+ \mathcal F_* =\{p_{2^j}:j\ge2\}.
+ \label{samp:explicit-mask}
+\end{equation}
+This is a concrete mask, defined without asking any unresolved arithmetic
+question.  Its disabled-prime reciprocal sum converges because $p_{2^j}>2^j$.  The associated
+$G_*$ is therefore a strictly increasing singular homeomorphism,
+with full-support measure of dimension one.  Thus the geometry
+exists independently of which Goldbach alternatives occur.

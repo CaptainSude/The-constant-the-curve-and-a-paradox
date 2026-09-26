@@ -1,0 +1,55 @@
+\section{Growth estimates for the mask function}
+\label{grw:proofs}
+
+The proof of Theorem~\ref{grw:order} matches an upper bound from all
+possible assignments with a lower bound from one carefully chosen set
+of assignments.
+
+\begin{proof}
+For every $\eta_g<\beta<1$, $B_g(u)\ll_\beta u^\beta$;
+this also ensures convergence of the reciprocal sum.  Integration
+by parts in \eqref{grw:majorant} yields
+\begin{equation}
+ \log P_{\mathcal F}(r)
+ =r\int_2^\infty\frac{B_g(u)}{u(u+r)}\,du
+ \ll_\beta r^\beta,
+ \label{grw:stieltjes}
+\end{equation}
+since $\int_0^\infty v^{\beta-1}/(1+v)\,dv<\infty$.
+This proves the upper bound for the order.
+
+For the lower bound suppose $\mathcal F$ is infinite and list it
+as $q_1<q_2<\cdots$.  Require $q_1,\ldots,q_k$ to select distinct
+labels and every other prime at most $q_k$ to select no label.
+The $k!$ possible assignments are disjoint.  Therefore
+\begin{align}
+ a_k&\ge\prod_{j=1}^k\frac1{q_j+k-1}
+       \prod_{\substack{p\le q_k\\p\notin\{q_1,\ldots,q_k\}}}
+             \frac{p-1}{p+k-1}\notag\\
+ &\ge(q_k+k)^{-k}\prod_{p\le q_k}
+                         (1+k/(p-1))^{-1}
+ \ge\left(\frac{c}{(q_k+k)\log q_k}\right)^k.
+ \label{grw:lower-coefficient}
+\end{align}
+The last inequality uses $\log(1+t)\le t$ and the classical
+Mertens estimate $\sum_{p\le y}(p-1)^{-1}\le\log\log y+O(1)$;
+see also \cite[Section~2]{fndLagarias2002}.
+Since $q_k\ge k+1$, taking $r_k=(2e/c)q_k\log q_k$ gives
+$\log\Phi_g(r_k)\ge k$.  Hence the order is at least
+\[
+ \limsup_{k\to\infty}
+ \frac{\log k}{\log q_k+\log\log q_k+O(1)}=\eta_g.
+\]
+For a finite mask the degree is its cardinality, so both exponents
+are zero.  This completes the general claim.
+
+For the Goldbach mask, $p_j\sim j\log j$ shows that the exponent
+of $B_g$ equals the exponent of $E$.  Apply the established bound
+\eqref{samp:pintz} in \eqref{grw:stieltjes}.  The part $u\le\sqrt r$
+is $O(r^{9/25})$.  For $u>\sqrt r$, replace $(\log u)^{-18/25}$
+by $O((\log r)^{-18/25})$ and scale $u=rv$ in the remaining
+integral.  This proves \eqref{grw:quantitative-growth}.
+Finally $M_k\le k!\Phi_{\Gold}(r)r^{-k}$; choose
+$r=k^{25/18}\log(k+1)$ and use $k!\le k^k$ to obtain
+\eqref{grw:moment-bound}.
+\end{proof}

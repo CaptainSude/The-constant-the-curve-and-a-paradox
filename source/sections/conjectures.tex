@@ -1,0 +1,172 @@
+\section{Two questions to ask the curve}\label{cq:section}
+
+The density has already given us a way to recognize individual primes. It is
+natural to ask whether familiar conjectures can be read from the probability
+law without extracting its Taylor coefficients one at a time. Two observations
+do this. One changes the way we sample the law and watches its variance. The
+other compares two moments and watches the signs of a matrix's eigenvalues.
+
+These are criteria: the relevant sign inequality and the unbounded matrix
+index remain to be proved. Their interest is that the observables are ordinary
+probabilistic and linear-algebraic objects belonging to the same law.
+
+\subsection{The Riemann hypothesis as a variance comparison}
+
+Write \(Y=\log W\). For \(t>-1\), change its distribution by giving an outcome
+of size \(Y=y\) a weight proportional to \(e^{ty}\). More formally,
+\[
+ \E_t h(Y)=\frac{\E[W^t h(\log W)]}{\E W^t}.
+\]
+This is exponential tilting. Increasing \(t\) favors the larger values of
+\(W\). If \(\kappa(t)=\log \E W^t=-\log K(t)\), differentiation gives
+\begin{equation}\label{cq:variance}
+ \Var_t(Y)=\kappa''(t)=\sum_p\frac{1}{(p-1+t)^2}.
+\end{equation}
+The variance is a softened count of primes. The prime number theorem suggests
+replacing the prime atoms by the continuous density \(du/\log u\), giving
+\[
+ V_0(t)=\int_2^\infty\frac{du}{(u-1+t)^2\log u}.
+\]
+Does the actual variance eventually lie above or below this smooth comparison?
+
+\begin{theorem}[An eventual variance deficit]\label{cq:rhvariance}
+The Riemann hypothesis holds if and only if
+\[
+             \Var_t(\log W)<V_0(t)
+             \qquad\text{for all sufficiently large }t.
+\]
+\end{theorem}
+
+The word \emph{eventually} matters. This is an inequality along the positive
+real axis, with no assumed simplicity or spacing of zeta zeros. Eventual-sign
+criteria for RH have a long history; Robin's work \cite{Robin1984} is an
+important example. The statistic here is the tilted variance of the law
+already constructed.
+
+\paragraph{What would an experimenter see?}
+The parameter $t$ changes which outcomes matter most: increasing it
+favors larger values of $W$. We then measure the spread of their
+logarithms. The comparison curve $V_0(t)$ is obtained by replacing the
+discrete primes with their smooth predicted density. The criterion
+says that RH is exactly an eventual ordering of these two spreads.
+No individual zero of zeta appears in the statement.
+
+The proof exposes why a one-sided comparison is possible. Prime squares
+give a negative correction to the smooth approximation. On RH, that
+correction is larger than all the possible oscillations from the
+nontrivial zeros combined. If RH fails, oscillations force crossings
+in both directions arbitrarily far out. The complete argument and its
+quantifiers are in Appendix~\ref{app:rh-variance}.
+
+This is an exact reformulation attached to a probability law we already
+met. Its usefulness as a route to RH would require a new way to compare
+those variances. The theorem supplies the comparison to aim for.
+
+\subsection{Twin primes hidden in matrices with positive entries}
+
+For this observation we separate the prime \(2\), writing
+\[
+ W=2U_2V,\qquad
+ K_o(s)=\prod_{p>2}(1-p^{-1})^s\left(1+\frac{s}{p-1}\right).
+\]
+Then \(\E V^s=1/K_o(s)\) for \(\Re s>-2\). Compare moments three units apart:
+\[
+ F(t)=\frac{\E V^t}{\E V^{t+3}}=\frac{K_o(t+3)}{K_o(t)},\qquad t>0.
+\]
+The number three has a purpose. Differences between odd primes are even;
+a shift of three crosses precisely the gap of two before it reaches the next
+possible gap.
+
+For a symmetric matrix, its \emph{negative index} is the number of negative
+eigenvalues, counted with multiplicity. Equivalently, it is the greatest
+dimension of a subspace on which its quadratic form is strictly negative.
+
+\begin{theorem}[A matrix count of twin pairs]\label{cq:twins}
+Fix \(a>0\), and form
+\[
+ \mathsf H_N(a)=
+ \left[\frac{(-1)^{i+j}F^{(i+j+2)}(a)}{(i+j+2)!}\right]_{0\leq i,j<N}.
+\]
+Every entry is strictly positive. Nevertheless,
+\[
+ \sup_{N\geq1}n_-(\mathsf H_N(a))
+   =\#\{p>2:p\text{ and }p-2\text{ are prime}\}.
+\]
+Both sides are allowed to be infinite. The negative index is nondecreasing
+in \(N\).
+\end{theorem}
+
+The surprise is the exact arithmetic count. A quotient of moments
+of the probability law gives a sequence of positive-entry matrices whose
+negative directions count twin pairs.
+
+The general relation between signed moments and negative squares belongs to
+indefinite moment theory \cite{BergChristensenMaserick1988}. We prove the
+compact signed-measure step directly in the appendix, which also shows
+exactly where the primes enter.
+
+\paragraph{Why a negative direction means a twin pair.}
+The moment quotient has one pole associated with each odd prime $p$.
+Its residue is negative precisely when $p-2$ is also prime. This sign
+test is elementary: the shift by three crosses the preceding odd prime
+only when the two primes are twins.
+
+The derivatives assemble those signed residues into a moment matrix.
+Polynomials can separate any finite collection of its negative atoms,
+turning each chosen twin pair into a negative direction in a sufficiently
+large matrix. Conversely, the matrix cannot have more negative directions
+than there are negative atoms. Appendix~\ref{app:twin-index} makes this
+argument precise and controls the infinite tail.
+
+Thus the matrices provide a counter whose reading can rise as their size
+increases. The twin-prime conjecture says that this counter never reaches
+a final value. All its entries are positive throughout; the signs being
+counted belong to quadratic forms, which combine entries using both
+positive and negative weights.
+
+For comparison, the positive-entry matrix
+$\left[\begin{smallmatrix}1&2\\2&1\end{smallmatrix}\right]$
+has quadratic form $-2$ at the vector $(1,-1)$, and therefore one
+negative direction. Our matrices turn this familiar linear-algebraic
+possibility into an exact count of prime pairs.
+
+\subsection{What a finite calculation can certify}
+
+The theorem turns any rigorously negative \(k\)-dimensional subspace into a
+certificate of \(k\) twin pairs. One can build the matrices from ordinary
+reciprocal-prime sums. At \(a=1\), write
+\[
+ \frac{F(1-z)}{F(1)}=\exp\left(\sum_{k\geq1}\frac{d_kz^k}{k}\right)
+                    =\sum_{n\geq0}c_nz^n,\qquad
+ d_k=\sum_{p>2}\{p^{-k}-(p+3)^{-k}\}.
+\]
+Then
+\[
+ c_0=1,\qquad c_n=\frac1n\sum_{k=1}^n d_kc_{n-k},\qquad
+ \mathsf H_N(1)=F(1)[c_{i+j+2}]_{0\leq i,j<N}.
+\]
+For an integer cutoff \(Y\),
+\[
+       0\leq d_k-d_k^{(Y)}\leq3Y^{-k}.
+\]
+These are explicit bounds for every uncomputed prime, not a decision to
+ignore the tail.
+
+An exact rational certificate supplied with the manuscript verifies that
+\([c_{i+j+2}]_{0\leq i,j<15}\) has at least four negative directions using
+only primes through \(100\) and the displayed tail bounds. We give its
+specification in Appendix~\ref{cq:certificate}. It recovers already known
+pairs; it demonstrates a verification mechanism rather than a new
+twin-prime lower bound.
+
+There is a reason to resist turning this calculation into a promise of an
+easy proof of infinitude. The tail bounds allow all omitted \(d_k\)-increments
+to be zero. Any conclusion valid uniformly for every such tail must also
+hold for the finite prime product, whose negative index counts only its
+existing twins. A proof forcing further negative directions needs additional
+arithmetic information. The matrix formulation tells us precisely what that
+information would have to accomplish.
+
+The next question is different. Instead of asking a probability law to
+answer a conjecture, we can ask whether its observable relationships reveal
+the hidden integers that produced them.

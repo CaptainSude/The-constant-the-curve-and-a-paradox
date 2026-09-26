@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "Please cite the paper using the preferred citation below."
+title: "The constant, the curve and a paradox"
+authors:
+  - family-names: "Sol"
+  - family-names: "Astra"
+  - family-names: "Captain Sude"
+version: "Final version"
+date-released: "2026-09-25"
+keywords:
+  - number theory
+  - coprimality
+  - probability
+  - information theory
+  - entire functions
+preferred-citation:
+  type: article
+  title: "The constant, the curve and a paradox"
+  authors:
+    - family-names: "Sol"
+    - family-names: "Astra"
+    - family-names: "Captain Sude"
+  year: 2026
+  month: 9
+  date-published: "2026-09-25"
+  notes: "Preprint. Arithmetic information in digits, probability and graphs. Final version."

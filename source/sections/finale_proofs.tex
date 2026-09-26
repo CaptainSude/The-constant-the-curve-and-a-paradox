@@ -1,0 +1,636 @@
+\section{Proofs for selections, crowds, entropy and deletion}\label{finapp:all}
+The main text keeps the short prime-resource arguments beside their
+conclusions.  This appendix supplies the quantitative estimates and
+limit transitions used there.
+
+\subsection{The binomial approximation}\label{finapp:binomial}
+\begin{proof}[Proof of Corollary~\ref{fin:binomialtv}]
+Write $M_m=\max_j\Prob(\operatorname{Binomial}(m,\theta)=j)$.
+Unimodality gives
+$d_{\mathrm{TV}}(Z+a,Z+b)\le |a-b|M_m$ for integer shifts.
+Couple $R$ with an independent $\operatorname{Binomial}(d_B,\theta)$
+and retain the common independent $Z$.  The distance is at most
+$d_B M_{m_B}=O_\theta(d_B/\sqrt{m_B})$.
+The prime number theorem gives
+$r_B\le\pi(\sqrt X)=O(\sqrt X/\log X)$ and
+$N_B\sim X/\log X$, proving the bound.  The other assertions follow
+from the polynomial factorization.
+\end{proof}
+
+\subsection{The compulsory part of a random selection}\label{finapp:greedy}
+We use Buchstab's function $\omega$: it satisfies $u\omega(u)=1$ for
+$1\le u\le2$ and $(u\omega(u))'=\omega(u-1)$ for $u>2$.
+The classical rough-number estimate is
+\begin{equation}
+ \Phi(x,y):=\#\{n\le x:\lpf(n)>y\}
+ \sim \omega(u)\frac{x}{\log y},\qquad
+ u=\frac{\log x}{\log y}>1
+ \label{fin:rough}
+\end{equation}
+when $u$ stays near a fixed number greater than one; $1$ is counted.
+We also use $\Phi(x,y)\ll x/\log y$ for $x\ge y\ge2$.
+These forms follow, for example, from the estimates reviewed and made
+explicit in \cite{finFanRough}.
+
+\begin{proof}[Proof of Theorem~\ref{fin:greedy}]
+Put $h=\log N$, $X=\lfloor N^\beta\rfloor$, and let $R$ count sampled
+integers with no prime divisor at most $N$.  By \eqref{fin:rough} and
+binomial concentration,
+$R\sim\omega(\beta)N/h$ in probability.
+
+A rough label fails to belong to $\mathcal U_N$ only by sharing a prime
+$p>N$ with another label.  If $r_p$ is the probability that the first
+label is rough and divisible by $p$, the expected number of such failures
+is at most $N^2\sum_{p>N}r_p/p$.
+For $p\le X/N$, the rough-number bound gives
+$r_p\ll1/(p\log N)$; for $p>X/N$, the only rough cofactor is $1$,
+so $r_p=1/X$.  Thus the expected number is
+\[
+ O_\beta\left(\frac{N}{h^2}+\frac{N^2}{X}\right)=o(N/h).
+\]
+Here $\sum_{p>N}p^{-2}\ll1/(N\log N)$ and
+$\sum_{N<p\le X}p^{-1}=O_\beta(1)$.
+It follows that $|\mathcal U_N|\ge R-o_{\Prob}(N/h)$.
+
+For the matching upper bound, put $y=N/h^2$.  In any coprime selection,
+each non-$y$-rough member uses a distinct prime at most $y$.
+Its size is therefore at most $R_y+\pi(y)$, where $R_y$ is the number
+of $y$-rough sampled labels.  Again \eqref{fin:rough} and binomial
+concentration give $R_y\sim\omega(\beta)N/h$, while
+$\pi(y)=o(N/h)$.  Since $|\mathcal U_N|\le\alpha_N$, both asymptotics
+follow.
+
+Finally every maximal selection contains $\mathcal U_N$, so
+\[
+ |S\mathbin{\triangle}T|\le2(\alpha_N-|\mathcal U_N|).
+\]
+A greedy scan always produces a maximal selection.  All conclusions
+hold simultaneously over its possible orders.
+\end{proof}
+
+\subsection{Crowds, missing primes and repeated powers}\label{finapp:crowds}
+\begin{proof}[Proof of Proposition~\ref{fin:coverage}]
+
+In the conditioned experiment,
+\[
+ \Prob(L_n>y)=\prod_{p\le y}\frac n{n+p-1}.
+\]
+For $y=t\sqrt{n\log n}$, the negative logarithm equals
+$n^{-1}\sum_{p\le y}(p-1)+
+O(n^{-2}\sum_{p\le y}p^2)\to t^2$ by the prime number theorem.
+
+In the ordinary experiment the survival probability is
+$\prod_{p\le y}(1-(1-1/p)^n)$.
+Put $a=\log n-3\log\log n+t$ and $y=n/a$.
+The quantitative prime number theorem and partial summation give
+\[
+ \sum_{p\le y}(1-1/p)^n
+ \sim \int_2^y\frac{e^{-n/u}}{\log u}\,du
+ =n\int_a^{n/2}\frac{e^{-v}}{v^2\log(n/v)}\,dv
+ \sim\frac{ne^{-a}}{a^2\log(n/a)}\to e^{-t}.
+\]
+Primes below $y/2$ contribute $o(1)$; on $[y/2,y]$ replacement by the
+integral is valid even on its effective width $y/\log n$, using the
+standard prime-number-theorem error $O(y e^{-c\sqrt{\log y}})$.
+The largest summand tends to zero, so the product tends to
+$e^{-e^{-t}}$.  This is the asserted law after the change $y=n/a$.
+\end{proof}
+
+The following local calculation also proves the remainder law
+\eqref{fin:remainderlaw}.
+To verify it, the excess exponent at $p$ has the representation
+$B_pG_p$, where $B_p$ is Bernoulli with parameter $n/(n+p-1)$ and
+$G_p$ is geometric with $\Prob(G_p=j)=(1-1/p)p^{-j}$, independently.
+The nonzero excesses occur at only finitely many primes almost surely.
+Taking the ratio of the mass at $j$ to the mass at zero gives
+$(n/(n+p))p^{-j}$ and proves the formula.
+
+\begin{proof}[Proof of Corollary~\ref{fin:dickman}]
+Couple the preceding excess exponents with
+$H_n=\prod_{p\le n}p^{G_p}$.  The chance that any exponent differs is
+at most
+$\pi(n)/n+n\sum_{p>n}p^{-2}=O(1/\log n)$.
+For $H_n$, logarithmic Laplace transforms expand into
+\[
+ \sum_{p\le n}\sum_{j\ge1}\frac{p^{-j}}j
+       (e^{-sj\log p/\log n}-1).
+\]
+The terms $j\ge2$ vanish by dominated convergence.  Mertens' theorem
+turns the $j=1$ terms into the asserted integral.
+
+The limit is the sum of a Poisson process on $(0,1]$ with intensity
+$dt/t$.  Its largest point is uniform, so
+$Y\overset d=U(1+Y')$, with $U$ uniform and $Y'$ an independent copy.
+Its density equals $\E[(1+Y')^{-1}{\bf1}_{y<1+Y'}]$, constant for
+$0<y<1$.  The Laplace transform is asymptotic to $e^{-\gamma}/s$ as
+$s\to\infty$, identifying that constant as $e^{-\gamma}$.
+\end{proof}
+
+\subsection{Real roots and the averaged Wishart polynomial}\label{finapp:matrix}
+For completeness, each prime acts on a polynomial by positive rescaling
+and $P\mapsto P+a zP'$, $a>0$.  This preserves negative real roots:
+for $P(z)=\prod_j(z+r_j)$, $r_j>0$, the imaginary part of
+$zP'(z)/P(z)=\sum_j z/(z+r_j)$ is strictly positive in the upper
+half-plane.  The new polynomial has no roots there or in the lower
+half-plane, and its positive coefficients exclude nonnegative roots.
+Start with $(1+z)^N$ and pass to the coefficient limit over primes.
+
+\begin{proof}[Proof of Theorem~\ref{fin:wishart}]
+Cauchy--Binet expresses a principal minor of $Z_NZ_N^*$ of order $j$
+as a sum of $\binom Nj$ squared Gaussian determinants, each with mean
+$j!$.  Consequently, for the Laguerre polynomial
+$L_N(x)=\sum_k\binom Nk(-x)^k/k!$,
+\[
+ \E\det(Z_NZ_N^*+tI)=N!L_N(-t).
+\]
+Since $\E \Comp^k=k!K(k)$, averaging at $t=\Comp z$ gives $N!J_N(z)$.
+Power biasing by $\Comp^N$ proves the characteristic-polynomial identity.
+
+Put $\kappa(t)=-\log K(t)$.  Differentiating its Euler product and
+using the prime number theorem and Mertens' product theorem gives
+\[
+ \kappa'(t)=\log\log t+\gamma+o(1),\qquad
+ \kappa''(t)\sim\frac1{t\log t}.
+\]
+For the second estimate, substitute $u=tv$ in
+$\int_2^\infty(u+t-1)^{-2}\,d\pi(u)$; for the first, split the
+logarithmic derivative at $p=t$.  The correction to
+$-\sum_{p\le t}\log(1-1/p)$ is $O(1/\log t)$ by partial summation.
+Write $b_N=K(N-1)/K(N)\sim a_N$.  Coefficient comparison yields
+\[
+ \frac1N\sum_jR_{N,j}=b_N,\qquad
+ \frac1N\sum_j(R_{N,j}-b_N)^2
+ =(N-1)\left(b_N^2-\frac{K(N-2)}{K(N)}\right)
+ \sim\frac{b_N^2}{\log N}.
+\]
+The last equivalence uses the second difference of $\kappa$, asymptotic
+to $1/(N\log N)$.  Chebyshev's inequality gives the root limit.
+
+The biased scalar satisfies
+\[
+ \E \CompN =(N+1)\frac{K(N+1)}{K(N)}
+       \sim e^{-\gamma}N/\log N,\qquad
+ \frac{\Var(\CompN )}{(\E \CompN )^2}
+ =\frac{N+2}{N+1}\frac{K(N+2)K(N)}{K(N+1)^2}-1\sim\frac1N.
+\]
+It therefore concentrates at that scale.  Apply the square
+Marchenko--Pastur theorem \cite{finMarchenkoPastur} to
+$Z_NZ_N^*/N$ and multiply by $N/(\CompN a_N)\to1$.
+\end{proof}
+
+\subsection{The prime-factor coupling and its moments}\label{finapp:entropy-coupling}
+Write $P=(P_i)$ for the limiting partition, and set
+$H=-\sum_iP_i\log P_i$, $D=e^H$.  The correlation formula
+\cite[Theorem 2.1]{finHanda} is
+\begin{equation}\label{fin:pdcorrelation}
+ \E\sum_{i_1,\ldots,i_k\ {\rm distinct}}
+ F(P_{i_1},\ldots,P_{i_k})
+ =
+ \int_{\substack{u_j>0\\\sum u_j<1}}
+ F(u_1,\ldots,u_k)\prod_j\frac{du_j}{u_j}.
+\end{equation}
+One can see this formula directly from the gamma process: take Poisson
+jumps with intensity $e^{-v}dv/v$, divide by their exponential total,
+and use independence of that total and the normalized jumps.
+After choosing $k$ jumps and writing the leftover total as
+$s(1-\sum u_j)$, the Jacobian cancels their common power of $s$;
+integrating $e^{-s}ds$ leaves \eqref{fin:pdcorrelation}.
+Taking $k=1$ and $F(u)=u\log(1/u)$ also gives
+$\E H=\int_0^1\log(1/u)\,du=1$.
+
+\begin{lemma}[Grouping repeated primes]\label{fin:entropycoupling}
+For a uniform integer $U_N\in[1,N]$, let $Q_N$ be its decreasing
+prime-power share sequence, with $Q_N=(1,0,\ldots)$ at $U_N=1$.
+There is a coupling with $P$ such that
+\[
+ \E\|Q_N-P\|_1\ll(\log N)^{-1},\qquad
+ \E|H(Q_N)-H(P)|\ll_\beta(\log N)^{-\beta}
+ \quad(0<\beta<1).
+\]
+Moreover $\sup_N\E e^{tH(Q_N)}<\infty$ for every fixed $t>0$.
+\end{lemma}
+\begin{proof}
+Haddad and Koukoulopoulos \cite{finHaddadKoukoulopoulos} couple the
+decreasing prime factors $q_i$ \emph{with multiplicity} to $P$ so that
+$\E\sum_i|\log q_i-P_i\log N|=O(1)$.
+Changing the denominator from $\log N$ to $\log U_N$ costs
+$1-\log U_N/\log N$ in $\ell^1$, with mean $O(1/\log N)$.
+The exceptional value $U_N=1$ costs $O(1/N)$.
+
+Grouping repeated occurrences of $p$ changes the vector by at most
+twice their excess logarithmic mass
+\[
+ R(n)=\frac1{\log n}\sum_p\sum_{j\ge2}
+                  (\log p){\bf1}_{p^j\mid n}.
+\]
+For $n\ge\sqrt N$, divisibility counting bounds its mean by
+$2(\log N)^{-1}\sum_p(\log p)/(p(p-1))$.
+The remaining integers contribute at most $N^{-1/2}$.
+Sorting minimizes matching distance and cannot increase this bound.
+This proves the first assertion.
+
+We record a moment bound used twice.  For $0<\alpha<1$ and a mass
+partition $Q$, write $S_\alpha(Q)=\sum_iQ_i^\alpha$.
+For every fixed positive integer $r$,
+\begin{equation}\label{fin:powerbound}
+ \sup_N\E S_\alpha(Q_N)^r<\infty.
+\end{equation}
+On $n\ge\sqrt N$, bound $S_\alpha$ by
+$\sum_{p^j\mid n}(2\log p/\log N)^\alpha$ and expand its $r$th power.
+A block of $b$ equal primes has exponent sum
+\[
+ \sum_{j_1,\ldots,j_b\ge1}p^{-\max(j_1,\ldots,j_b)}
+ =\sum_{m\ge1}\frac{m^b-(m-1)^b}{p^m}\ll_b\frac1p.
+\]
+Then $\sum_{p\le N}(\log p)^{\alpha b}/p
+\ll_{\alpha,b}(\log N)^{\alpha b}$ bounds each block, and there are
+only finitely many partitions of $r$ occurrences.
+Integers below $\sqrt N$ contribute negligibly because
+$S_\alpha\le(\log N/\log2)^{1-\alpha}$.
+
+For $h(u)=u\log(1/u)$, $\alpha=(1-\beta)/2$, elementary differentiation
+and a split into $u\le v/2$ and $v/2<u\le v$ give
+\[
+ |h(u)-h(v)|\ll_\beta |u-v|^\beta(u^\alpha+v^\alpha).
+\]
+Hölder's inequality, first on coordinates and then on expectations,
+bounds the entropy difference by a constant times
+$(\E\|Q_N-P\|_1)^\beta$; the remaining factors are bounded by
+$\E S_{1/2}(Q_N)$ and
+$\E S_{1/2}(P)=2$, the latter from \eqref{fin:pdcorrelation}.
+Finally Jensen's inequality gives
+$e^{(1-\alpha)H(Q)}\le S_\alpha(Q)$, so
+\eqref{fin:powerbound} bounds every fixed exponential moment.
+\end{proof}
+It follows that the limiting mean effective count is
+$\mathfrak P=\E e^H$, numerically about $2.9621$.
+This is different from $e^{\E H}=e$.
+The following recursion makes that numerical constant reproducible.
+If $h_2(u)=-u\log u-(1-u)\log(1-u)$, stick breaking gives
+$H\overset d=h_2(U)+(1-U)H'$.
+For $a_r=\E H^r/r!$,
+\[
+ a_0=1,\qquad
+ a_r=\frac{r+1}{r}\sum_{j<r}a_j
+       \int_0^1\frac{h_2(u)^{r-j}}{(r-j)!}(1-u)^j\,du,\qquad
+ \mathfrak P=\sum_{r\ge0}a_r.
+\]
+All terms are nonnegative.  Writing the entropy as a sum of
+stick-breaking contributions bounds
+$H\le(\log2)(1+\sum_{j\ge1}\prod_{\ell\le j}(1-U_\ell))$.
+The product terms are exponentials of a rate-one Poisson process's
+arrival times; its exponential formula gives
+$\E e^{tH}\le2^t\exp(2^t-1)$.
+Thus truncating the last series at $r=R$ has error at most
+$2^{-R-1}\E e^{2H}<81\,2^{-R-1}$.
+Lemma~\ref{fin:entropycoupling}, with uniform integrability, also proves
+$\E D(U_N)\to\mathfrak P$.
+
+
+\subsection{The sharp entropy tail}\label{finapp:entropy-tail}
+\begin{proof}[Proof of Theorem~\ref{fin:entropytail}]
+
+Let $M(t)=\E e^{tH}$ and $h(u)=u\log(1/u)$.
+Expanding a nonnegative product and using
+\eqref{fin:pdcorrelation} gives, for every $a>0$,
+\[
+ \log M(t)\le a+I_t(a),\qquad
+ I_t(a)=\int_0^1 e^{-au}(e^{th(u)}-1)\frac{du}{u}.
+\]
+Here the simplex constraint was bounded by
+$e^{a(1-\sum u_j)}$.  Put $L=\log t$, choose $b>0$ from
+$b+\tfrac12\log b+\tfrac12\log(2\pi)=L$, and set
+$a=t(\log(t/b)-1)$.
+Then
+\[
+ b=L-\tfrac12\log L-\tfrac12\log(2\pi)+o(1).
+\]
+Under $z=tu/b$, the positive exponent becomes
+$b\chi(z)$ with $\chi(z)=z(1-\log z)$, whose unique maximum is $\chi(1)=1$
+and whose second derivative there is $-1$.
+Laplace's method yields
+\[
+ I_t(a)=e^b\sqrt{2\pi/b}(1+o(1))
+       =\frac tb(1+o(1)).
+\]
+To control the endpoint, the cancellation in $e^{th(u)}-1$ makes the
+integral over $0<z<b^{-2}$ bounded.  On
+$[b^{-2},1/2]\cup[2,e]$ the maximum of $\chi$ is strictly below one,
+and on $[e,t/b]$ the integral is $O(\log t)$.
+All these errors are $o(e^b/\sqrt b)$.
+Consequently
+\[
+ \log M(t)\le t(L-\log L-1)
+ +\frac tL\left(\tfrac12\log L+1+\tfrac12\log(2\pi)\right)
+ +o(t/L).
+\]
+Markov's inequality with $t=x\log x$ gives the required upper bound
+on the probability.
+
+For the reverse bound write $X=\log x$ and choose
+\[
+ \eta=X^{-1/8},\quad \epsilon=X^{-1/4},\quad
+ v=(1-\eta)/X,\quad
+ k=\left\lceil x\exp((1/2+\eta)/X)\right\rceil .
+\]
+In $\mathbb R^k$ consider the region
+\[
+ \mathcal R=\left\{ |z_i|\le\epsilon,\quad
+  -\tfrac12\le\sum_i z_i\le0,\quad
+  (1-\eta/4)kv\le\sum_i z_i^2\le(1+\eta/4)kv\right\}.
+\]
+Set $u_i=(1+z_i)/k$.  Their total lies in $[1-1/(2k),1]$.
+The unlisted mass is too small to contain another component in
+$[(1-\epsilon)/k,(1+\epsilon)/k]$.
+Thus the factorial count, divided by $k!$, is an event probability,
+rather than an overcount.
+
+Taylor's inequality
+$(1+z)\log(1+z)\le z+(\tfrac12+C\epsilon)z^2$ shows that on this event
+\[
+ H\ge(1-\tfrac1{2k})\log k
+       -(\tfrac12+C\epsilon)(1+\eta/4)v>\log x
+\]
+for large $x$.  Also
+$\prod_i(1+z_i)^{-1}\ge1$, so
+\[
+ \Prob(D>x)\ge\frac{\operatorname{vol}(\mathcal R)}{k!}.
+\]
+
+We give the volume estimate to identify the constant.
+Take independent $N(0,v)$ variables, each conditioned to lie in
+$[-\epsilon,\epsilon]$.  The conditioning costs
+$\exp(-o(k))$, changes the variance by a relative $o(\eta)$, and
+keeps the standardized third moments bounded.
+Berry--Esseen gives probability at least $c/\sqrt{kv}$ for their
+sum to lie in $[-1/2,0]$: its $O(k^{-1/2})$ error is smaller than this
+slab probability.  Chebyshev bounds failure of the quadratic shell by
+$O((k\eta^2)^{-1})=o((kv)^{-1/2})$.
+Undoing the Gaussian density on the shell therefore gives
+\[
+ \log\operatorname{vol}(\mathcal R)
+ \ge \tfrac k2\log(2\pi ev)-o(k).
+\]
+Stirling's formula now yields
+\[
+ -\log\Prob(D>x)
+ \le k\log k-k-\tfrac k2\log(2\pi ev)+o(k)
+ =x\left(X+\tfrac12\log X-1-\tfrac12\log(2\pi)+o(1)\right).
+\]
+This matches the first bound.
+\end{proof}
+
+\subsection{The Gaussian profile and its transfer to integers}\label{finapp:entropy-profile}
+\begin{proof}[Proof of Theorem~\ref{fin:entropyprofile}]
+
+Put $X=\log x$, $t=xX$, and use $a,b$ from the preceding saddle
+calculation.  Fix a continuous compactly supported function $\psi$,
+and write $T_x=\int\psi\,d\nu_x$.
+For fixed real $s$, the exponent
+\[
+ q(u)=tu\log(1/u)+sxu\,\psi(\sqrt X(xu-1))
+\]
+is nonnegative for large $x$.  On the perturbation's support,
+$u=(1+O(X^{-1/2}))/x$, so its first term is of order $X^2$
+and dominates the bounded perturbation.  The same nonnegative
+factorial expansion gives
+\[
+ \E e^{tH+sxT_x}\le \exp(a+I_t(a)+\Delta_x(s)),
+\]
+where
+\[
+ \Delta_x(s)=\int_0^1 e^{tu\log(1/u)-au}
+        \left(e^{sxu\psi(\sqrt X(xu-1))}-1\right)\frac{du}{u}.
+\]
+Under $y=\sqrt X(xu-1)$, uniformly on that fixed compact support,
+the exponential is $e^{b-y^2/2+o(1)}$, and
+$du/u=(1+o(1))dy/\sqrt X$.
+The saddle equation gives $e^b/(x\sqrt X)\to1/\sqrt{2\pi}$.
+Hence, with $Z$ standard Gaussian,
+\[
+ \frac{\Delta_x(s)}x\longrightarrow
+ \Lambda_\psi(s):=\E(e^{s\psi(Z)}-1).
+\]
+The sharp lower and upper bounds just proved also give
+$\log\Prob(H>X)=a+I_t(a)-tX+o(x)$.
+For $s>0$, exponential Markov therefore implies
+\[
+ \limsup\frac1x\log
+ \Prob(T_x\ge \E\psi(Z)+\delta\mid H>X)
+ \le\Lambda_\psi(s)-s(\E\psi(Z)+\delta)<0
+\]
+when $s$ is small enough.  Negative $s$ gives the lower deviation.
+Thus compactly supported continuous tests converge, with exponentially
+small conditional deviation probabilities.
+All measures have mass one and the limit has mass one, so this vague
+convergence is weak convergence.  On each fixed standardized interval,
+$xP_i=1+O(X^{-1/2})$, allowing weights $P_i$ to be replaced by $1/x$.
+This proves the count assertion.
+\end{proof}
+\begin{proof}[Proof of Corollary~\ref{fin:integerentropy}]
+
+Let $L=\log N$, choose $\beta\in(1-\epsilon/2,1)$, and first take
+$\eta=(\log x)^{-2}$.  Lemma~\ref{fin:entropycoupling} bounds the
+probability of entropy error exceeding $\eta$ by
+$O_\beta(\eta^{-1}L^{-\beta})$.
+Both comparison tails at $xe^\eta$ and $xe^{-\eta}$ are at least
+$L^{-(1-\epsilon/2)+o(1)}$.
+The coupling error is negligible relative to them.  Sandwiching the
+integer event between these two tails proves the tail formula because
+$\eta\log x\to0$ changes the exponent by only $o(x)$.
+
+For the profile, choose instead
+$\eta=x^{-2}(\log x)^{-2}$.  For a compactly supported Lipschitz $\psi$,
+the function
+$u\mapsto u\psi(\sqrt{\log x}(xu-1))$ is Lipschitz with constant
+$O_\psi(1+x\sqrt{\log x})$.  Thus its coupled sums differ in expectation
+by $O_\psi((1+x\sqrt{\log x})/L)$.
+Both this Markov error and the entropy-error probability remain
+negligible relative to the integer conditioning probability.
+The bad-profile probability in the limiting model, on
+$H>\log x-\eta$, is at most
+$\exp(-c_\psi x+o(x))$ times its tail probability, by the proof of
+Theorem~\ref{fin:entropyprofile}.  The shift changes the saddle
+normalization by $o(x)$ and the standardized test by $o(1)$.
+The ratio of that tail to the integer tail is $\exp(o(x))$, by the
+already proved logarithmic asymptotics.  Therefore its conditional
+bad-profile probability still tends to zero.  A countable determining
+set of Lipschitz tests completes the proof.
+\end{proof}
+
+\subsection{Why every finite deletion depth is abundant}\label{finapp:deletion}
+The iteration needs a lower bound on the \emph{number} of Goldbach
+representations; mere almost-everywhere existence would not suffice.
+\begin{lemma}[Robust almost-all Goldbach]\label{fin:robust}
+Let $R_2(m)$ count ordered prime pairs summing to the even integer $m$.
+There is $c>0$ such that, for every $A>0$,
+\[
+ \#\{m\le Y:m\text{ even},\
+       R_2(m)<cm/(\log m)^2\}\ll_A Y/(\log Y)^A.
+\]
+\end{lemma}
+\begin{proof}
+We use the weighted form explicitly obtained in the proof of
+\cite[Theorem 4.3]{finBhowmikGrimmelt}, the classical almost-all
+Goldbach argument.  Outside a set with arbitrarily large logarithmic
+saving, it gives
+\[
+ \sum_{a+b=m}\Lambda(a)\Lambda(b)
+             \ge \tfrac12m\mathfrak S(m).
+\]
+The singular series has a positive absolute lower bound for even $m$.
+Pairs involving a non-prime prime power contribute
+$O(\sqrt m(\log m)^3)=o(m)$: there are
+$O(\sqrt m\log m)$ possible proper prime powers and each weight product
+is at most $(\log m)^2$.  Remove them and bound each remaining
+prime-pair weight by $(\log m)^2$.
+This gives the asserted lower bound, with a smaller $c$.
+One may apply the weighted estimate on dyadic intervals and sum them;
+the finitely many small targets are absorbed in the implicit constant.
+\end{proof}
+\begin{proof}[Finite-depth assertions of Theorem~\ref{fin:delete}]
+For abundance, write $D_k(t)=\#\{p\le t:p\notin B_k\}$.
+The estimate at $k=0$ is immediate when starting from all primes.
+For the Goldbach-enabled initial set it follows from
+Lemma~\ref{fin:robust}, since an index $i$ with $p_i\le X$ has target
+at most $2(\pi(X)+1)$.
+
+Assume the estimate at depth $k$.  Each missing prime spoils at most
+two ordered pairs for a fixed target, so
+\[
+ R_{2,B_k}(m)\ge R_2(m)-2D_k(m).
+\]
+Taking the induction estimate with exponent $4$ gives
+$D_k(m)=o_k(m/\log^2m)$.
+Every sufficiently large robust target from Lemma~\ref{fin:robust}
+therefore still has a certificate at depth $k$.
+The newly missing indices through $\pi(X)$ form a subset of the
+lemma's exceptional targets through $2(\pi(X)+1)$.
+Together with the previously missing primes and finitely many small
+targets this proves the estimate at depth $k+1$, for every requested
+logarithmic power.  Its constants can depend on $k$.
+
+For the ternary statement, the same robust lemma already implies
+$R_3(n)\gg n^2/\log^3n$ for odd $n$: take primes
+$q\in[n/3,n/2]$.  The prime number theorem supplies
+$\gg n/\log n$ choices, and all but $O_A(n/\log^A n)$ have robust
+even target $n-q$.  Each such target has
+$\gg n/\log^2n$ representations.
+A triple using a missing prime can be counted by choosing its position,
+the missing prime, and one other prime.  There are at most
+$3D_k(n)\pi(n)=o(R_3(n))$ such triples.  Hence
+\mbox{$R_{3,B_k}(n)/R_3(n)\to1$}.
+\end{proof}
+
+\subsection{The graph spectrum and its collapse}\label{finapp:spectrum}
+The two-dimensional local matrix and its eigenvalues are
+\[
+ L_p=\begin{pmatrix}
+ 1-1/p&\sqrt{(1/p)(1-1/p)}\\
+ \sqrt{(1/p)(1-1/p)}&0
+ \end{pmatrix},\qquad
+ a_p^\pm=\frac{p-1\pm\sqrt{(p-1)(p+3)}}{2p}.
+\]
+Put $b_p=-a_p^-/a_p^+$ and $\Lambda_B=\prod_{p\in B}a_p^+$.
+The product is positive since $a_p^+=1+O(p^{-2})$.
+The nonzero spectrum, with multiplicity, is
+\begin{equation}\label{fin:localspectrum}
+ \Lambda_B(-1)^{|F|}\prod_{p\in F}b_p,\qquad F\subset B\text{ finite}.
+\end{equation}
+For the full prime set this is Zagier's spectrum
+\cite[Appendix C]{finCoprimeChain}.
+The tensor calculation also proves the version for $B$.
+Indeed finite prime cutoffs have exactly these products.
+Their kernels converge in $L^2$ because
+$\sum_{p>z}1/p^2\to0$; a product involving a moving prime tends to zero
+since $b_p\sim1/p$.  Thus every eigenvalue bounded away from zero
+comes from a fixed finite set $F$, establishing the entire nonzero
+list.
+
+\begin{lemma}[The spectral tail]\label{fin:weyl}
+Let $B$ omit a prime set $D$ with $\sum_{p\in D}1/p<\infty$.
+If $N_{B,+}(u)$ and $N_{B,-}(u)$ count eigenvalues of $T_B$ of each
+sign and magnitude at least $u$, then
+\[
+ N_{B,+}(u)\sim N_{B,-}(u)\sim\frac{A_B}{2u},
+\]
+where
+\[
+ A_B=\sqrt{K_B(4)}\prod_{p\in D}(1-1/p),\qquad
+ K_B(4)=\prod_{p\in B}(1-1/p)^4(1+4/(p-1)).
+\]
+\end{lemma}
+\begin{proof}
+For $B=\mathcal P$, the absolute and signed spectral Dirichlet series are
+\[
+ D_{\rm abs}(s)=\Lambda_{\mathcal P}^s\prod_p(1+b_p^s)
+              =\zeta(s)\mathcal A(s),\qquad
+ D_{\rm sgn}(s)=\Lambda_{\mathcal P}^s\prod_p(1-b_p^s)
+              =\mathcal E(s)/\zeta(s).
+\]
+Since $b_p=p^{-1}+O(p^{-2})$, the correction $\mathcal A$ is analytic
+for $\Re s>1/2$, and $\mathcal E$ is analytic for $\Re s>0$.
+These assertions follow from locally uniform product estimates
+$1+O(p^{-\Re s-1}+p^{-2\Re s})$ and
+$1+O(p^{-\Re s-1})$, respectively.
+At $s=1$,
+\[
+ \mathcal A(1)
+ =\prod_p(1-1/p)(a_p^+-a_p^-)=\sqrt{K(4)}=:A.
+\]
+The identity follows by squaring each local factor.
+The two positive-coefficient series
+$(D_{\rm abs}\pm D_{\rm sgn})/2$ have a simple pole of residue $A/2$
+at one and a continuous remainder on $\Re s=1$; the prime number
+theorem supplies nonvanishing of $\zeta$ on that line.
+The Wiener--Ikehara theorem \cite{finIkehara}, in its
+Laplace--Stieltjes form, gives
+$N_{\mathcal P,\pm}(u)\sim A/(2u)$.
+
+For the omitted set $D$, divide out its local factors:
+\[
+ D_{{\rm abs},B}(s)
+ =D_{\rm abs}(s)\Lambda_D^{-s}
+                \prod_{p\in D}(1+b_p^s)^{-1},
+ \quad
+ D_{{\rm sgn},B}(s)
+ =D_{\rm sgn}(s)\Lambda_D^{-s}
+                \prod_{p\in D}(1-b_p^s)^{-1}.
+\]
+Expand each inverse factor into a geometric series.  At exponent one
+the total absolute coefficient weight is bounded by
+$\Lambda_D^{-1}\prod_{p\in D}(1-b_p)^{-1}<\infty$.
+The full-prime counting functions are $O(x)$ at reciprocal threshold
+$x$, so dominated convergence applies to these convolutions.
+The absolute count has coefficient
+\[
+ \frac{A}{\Lambda_D\prod_{p\in D}(1+b_p)}
+ =A\prod_{p\in D}\frac{p}{\sqrt{(p-1)(p+3)}},
+\]
+while the signed count remains $o(x)$.  The displayed coefficient
+equals the asserted $A_B$, again by the local identity for $K(4)$.
+\end{proof}
+\begin{proof}[Proof of Theorem~\ref{fin:collapse}]
+Theorem~\ref{fin:delete} and partial summation imply
+$\sum_{p\notin B_k}1/p<\infty$ for each fixed $k$, so the spectral
+tail lemma applies.  Its equivalent product is
+\[
+ A_k=\sqrt{K(4)}
+       \prod_{p\notin B_k}\frac{p}{\sqrt{(p-1)(p+3)}}.
+\]
+Every factor is below one.  Their logarithms are
+$-1/p+O(p^{-2})$, and the omitted sets increase to
+$\mathcal P\setminus\{2,3,5\}$.  Divergence of the prime harmonic
+series proves $A_k\downarrow0$.
+
+Two independent prime profiles share only finitely many primes almost
+surely, since $\sum_p1/p^2<\infty$.  All shared primes above $5$
+eventually disappear from $B_k$.  Thus the kernels converge almost
+everywhere to $G_{\{2,3,5\}}$, and bounded convergence gives
+Hilbert--Schmidt convergence.
+Its three local matrices each have two nonzero eigenvalues, so the
+tensor has rank $2^3=8$.
+Finally the local four-clique factors are below one, so removing
+restrictions increases the product.  Its final value is
+$(5/16)(16/27)(512/625)=512/3375$.
+\end{proof}

@@ -1,0 +1,255 @@
+\section{Conjectures and open questions}\label{open:section}
+
+The proved statements leave a small set of next steps.  We distinguish
+the one prediction stated as a conjecture from six questions whose
+answers are not established here.  The definitions are recalled so
+that each can be read independently.  The connection to classical
+conjectures remains visible in Proposition~\ref{play:normality}:
+normality of the original constant is equivalent to Goldbach together
+with the naturally averaged Liouville Chowla conjecture.
+
+\subsection{A conjecture about the typical deletion time}
+
+In the deletion experiment of Section~\ref{fin:deletion}, begin with
+all primes except $7$.  At every round retain $p_i$ only when
+$2(i+1)$ is the sum of two currently retained primes; the same
+prime may be used twice, and all deletions happen simultaneously.
+Write $\tau(p)$ for the first round in which $p$ is absent, with
+$\tau(7)=0$ and $\tau(2)=\tau(3)=\tau(5)=\infty$, and put
+\[
+ M(x)=\max_{5<p\le x}\tau(p),
+\]
+where the maximum is over primes.  Proposition~\ref{fin:depthclock}
+proves $M(x)\sim\log x/\log\log x$.  This is the clock of the
+last survivor in a finite window.  We conjecture that it also gives
+the typical deletion time.
+
+\begin{conjecture}[Most primes share the last survivor's clock]\label{fin:typicaldepth}
+Let $P_x$ be a uniformly chosen prime in $(5,x]$.
+Then
+\[
+ \frac{\tau(P_x)}{M(x)}\longrightarrow1
+ \qquad\text{in probability}.
+\]
+\end{conjecture}
+
+Here the randomness is only the uniform choice of $P_x$; the deletion
+process itself is deterministic.  The exact computation through
+$10^6$ found that about $94.1\%$ of the $78\,495$ primes above $5$
+disappear in rounds $11$, $12$ or $13$, with $M(10^6)=13$.
+The proposition proves the clock for the last surviving prime.
+The conjecture asks whether nearly the whole population follows it.
+The computation is a finite experiment, not evidence for a specific
+error term; fixed-depth abundance alone does not settle this question.
+
+\subsection{How much data does arithmetic recovery need?}
+
+Both questions in this subsection use the ordinary-integer experiment
+of \eqref{rec:finite-model}.  There are $N$ labelled boxes, with hidden
+contents $X_1,\ldots,X_N$ independently uniform on
+$\{1,\ldots,N^2\}$.  For each unordered pair we observe one bit saying
+whether the contents are coprime, independently flipped with common
+probability $\varepsilon_N$.  The flips are independent of the
+integers; the decoder is not told $\varepsilon_N$.
+Theorem~\ref{rec:threshold} identifies the consistency threshold
+\[
+ T_N=N(1-2\varepsilon_N)^2\longrightarrow\infty.
+\]
+It names the shared primes on a fraction of pairs tending to one.
+Corollary~\ref{rec:profiles} then recovers divisibility by each fixed
+prime at a fixed labelled box.  These are asymptotic results; the
+following asks for a useful finite guarantee.  Take $N^2\ge p$ so
+that conditioning on either divisibility outcome is meaningful.
+
+\begin{question}[How many boxes are needed to name a prime?]\label{rec:prime-sample-question}
+In the finite experiment, fix a prime $p$, a constant edge-flip rate
+$\varepsilon_N=\varepsilon\ne1/2$, and
+$0<\delta<1/2$. How large must $N$ be to decide whether $p\mid X_i$,
+with conditional error at most $\delta$ both for a multiple and for a
+nonmultiple of $p$? Require a computationally feasible procedure that
+is not supplied the error rate. How does the answer grow with $p$
+and with the closeness of the channel to a fair coin?
+\end{question}
+
+The second question concerns the original message rather than the
+full collection of shared-prime sets.  Fix an unknown mask
+$g=(g_j)$ with $g_1=1$, and set
+\[
+ x_g(1)=0,\qquad
+ x_g(n)=\frac{1-\lambda(n)}2g_{\ell(n)}\quad(n\ge2),
+\]
+where $\ell(n)$ is the index of the least prime factor of $n$.
+Alongside the noisy graph, observe aligned digit marks
+\[
+ Z_i=x_g(X_i)\mathbin{\oplus}B_i',
+ \qquad B_i'\sim\operatorname{Bernoulli}(\eta_N).
+\]
+These digit flips are independent of one another, the integers and
+the edge flips.  As in Theorem~\ref{rec:message}, the digit-noise
+probability $\eta_N$ is supplied; the edge-noise probability is not.
+Writing $a_N=1-2\varepsilon_N$ and $b_N=1-2\eta_N$, that theorem
+recovers both the message and almost every shared-prime set when
+$Na_N^2\to\infty$ and $Nb_N^2\to\infty$.
+Here recovering the message means recovering each fixed finite prefix
+of $g$ with probability tending to one as $N$ grows.
+
+\begin{question}[How much graph does the message need?]\label{rec:message-only-question}
+If the only required output is the arithmetic message, what conditions
+on the two noise sequences suffice? In particular, can the edge signal
+be weaker than the threshold needed to recover shared-prime sets?
+\end{question}
+
+This asks for a separate decoding theorem.  The joint-task result
+supplies the digit-noise rate to the procedure, and makes no assertion
+of adaptation to an arbitrary unknown rate approaching one half.
+
+\subsection{Can one hear every disabled prime?}
+
+The exact bias can confuse a single disabled lane with infinitely
+many of them, as Proposition~\ref{grw:bias-collision} shows.  The
+whole function distinguishes that example immediately: one function
+is linear and the other is transcendental.  How much farther does
+this recovery go?
+
+For this question only, write $\Phi_{\mathcal F}$ for the normalized
+entire function in \eqref{fnd:two-functions} whose disabled-prime set
+is $\mathcal F$.  Its Taylor coefficients are $M_k/k!$, where $M_k$
+are the conditional correlations of Section~\ref{fnd:correlations}.
+The counting exponent of
+$\mathcal F$ is
+\[
+ \limsup_{R\to\infty}
+ \frac{\log\max(1,\#(\mathcal F\cap[2,R]))}{\log R}.
+\]
+Restrict to masks with counting exponent strictly below one, so that
+their zero multisets determine the normalized entire functions by
+Corollary~\ref{grw:zeros}.
+
+\begin{question}[Hearing the mask]\label{play:mask-rigidity}
+Let $\mathcal F$ and $\mathcal H$ be sets of odd primes whose
+counting exponents are strictly below one.  Does
+\[
+ \Phi_{\mathcal F}\equiv\Phi_{\mathcal H}
+ \quad\Longrightarrow\quad \mathcal F=\mathcal H?
+\]
+Equivalently, can two different such masks have exactly the same
+complex zeros, including multiplicities?
+\end{question}
+
+There are three equivalent ways to supply the data: all conditional
+correlations $M_k$, the entire function $\Phi$, or the nonzero
+eigenvalues of the positive mask operator $A_g$.  Indeed,
+$\Psi$ is obtained from $\Phi$ by multiplying its $k$th Taylor
+coefficient by the fixed nonzero number $K(k)$, and
+$\Psi(z)=\prod_j(1+\alpha_jz)$ records those eigenvalues.
+Thus this is also an inverse spectral question for a restricted
+arithmetic family of operators.
+
+For finite masks the answer is yes: even the first derivative
+$\Phi'(0)=S_g$ determines the mask.  An infinite mask cannot agree
+with a finite one because the corresponding functions have different
+degrees.  A possible failure must therefore involve two infinite
+masks.  We already know that identical functions would force the
+same counting exponent.  The question is whether the higher
+correlations retain the individual prime locations as well.
+
+\subsection{Does the triangular match include the last root?}
+
+Recall
+\[
+ J_N(z)=\sum_{k=0}^N\binom Nk K(k)z^k,
+\]
+where $K(k)$ is the limiting probability that $k$ random integers
+are pairwise coprime.  Its roots are negative; write them as
+$-R_{N,1},\ldots,-R_{N,N}$, with $R_{N,j}>0$ and multiplicities
+included.  Theorem~\ref{tri:main} shows that the empirical
+distribution of
+\[
+ \frac{\exp(e^{-\gamma}R_{N,j})}{N\log N}
+\]
+approaches the Dykema--Haagerup law $\operatorname{DH}_1$, whose
+support is $[0,e]$; $\gamma$ is Euler's constant.  This is a
+statement about the whole histogram.
+
+\begin{question}[Does the last root find the same edge?]\label{tri:edgequestion}
+Do the largest arithmetic roots satisfy
+\[
+ e^{-\gamma}\max_jR_{N,j}-\log N-\log\log N\longrightarrow1,
+\]
+or, equivalently,
+\[
+ \max_j\frac{\exp(e^{-\gamma}R_{N,j})}{N\log N}
+ \longrightarrow e?
+\]
+\end{question}
+
+This asks whether the match reaches the edge as well as the histogram.
+For the Gaussian triangular matrix, the largest squared singular value
+does tend to $e$ \cite[Theorem 2]{triCheliotis}.
+The empirical convergence proved here leaves room for a small number
+of arithmetic outliers.  It implies the corresponding lower limit is
+at least $e$, since the limiting law has mass arbitrarily close to that
+edge; excluding larger outliers needs more.
+The same distinction leaves convergence of transformed empirical
+moments unproved.
+
+\subsection{Locating the returns to the middle height}
+
+Let $f$ be the entire prime density of
+Theorem~\ref{fnd:entire-density}, and set
+$m=f(0)=1/(2\mathfrak C_2)$.
+Theorem~\ref{play:midpoint} proves that every polynomial target is
+met infinitely often.  For the target $m$, the origin is the only
+real solution; reflection and conjugation place roots off the axes
+in quartets.  The theorem does not locate those roots.
+
+\begin{question}[Where does the middle height return?]
+\label{play:midpoint-geometry}
+Are there infinitely many solutions of $f(z)=m$ on the imaginary
+axis?  How fast does
+\[
+ N_m(R)=\#\{z\in\mathbb C:|z|\le R,\ f(z)=m\},
+\]
+with multiplicities counted, grow as $R\to\infty$?
+\end{question}
+
+The first-quadrant calculation in Section~\ref{play:section} is an
+experiment with finite approximations, not a certification of a root.
+The imaginary-axis question asks about a different part of the
+geometry, while the counting question measures how often the middle
+height returns in the whole plane.
+
+\subsection{The dimensions inside a singular staircase}
+
+Let $p_j$ be the $j$th prime.  Disable exactly the lanes in
+$\mathcal F_*=\{p_{2^j}:j\ge2\}$, the explicit mask
+\eqref{samp:explicit-mask}, and write $\nu_*$ for its primitive
+sampling measure from Theorem~\ref{samp:staircase}.  This measure is
+singular continuous, has support $[0,1]$, and has Hausdorff dimension
+one.  The local dimension describes a different feature: how quickly
+the probability around an individual point shrinks.
+
+For $y\in[0,1]$, let $I_n(y)$ be its dyadic interval of length
+$2^{-n}$; endpoints may be assigned consistently to either adjacent
+interval since the measure is nonatomic.  Choose $Y$ with law
+$\nu_*$.  Then the following local dimension is itself a random
+variable.
+
+\begin{question}[The dimensions inside the staircase]
+\label{play:local-dimensions}
+For the explicit infinite mask
+$\mathcal F_* =\{p_{2^j}:j\ge2\}$, determine the distribution of
+\[
+ \underline d_*(Y)=\liminf_{n\to\infty}
+       \frac{-\log_2\nu_*(I_n(Y))}{n},\qquad Y\sim\nu_*.
+\]
+In particular, does this distribution have any atoms?
+\end{question}
+
+The example with only the lane of $3$ disabled, in
+Section~\ref{play:section}, gives an exact comparison: its local
+dimension equals $1$, $5/6$ or $2/3$, with probabilities $1/4$,
+$1/2$ and $1/4$.  Infinitely many prime lanes may produce a richer
+distribution than these three values.  The question concerns the
+geometry of the construction independently of which Goldbach
+answers occur.

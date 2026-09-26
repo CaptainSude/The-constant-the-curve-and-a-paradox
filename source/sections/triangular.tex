@@ -1,0 +1,100 @@
+\subsection{The hidden spread is a triangular spectrum}\label{tri:section}
+The roots of $J_N$ have just collapsed to one point after division by
+$e^\gamma\log N$.  That does not mean they have become equal.
+It means we have chosen a scale on which their interesting differences
+are hard to see.
+
+A finer view reveals a familiar shape from an apparently distant
+experiment.  Fill the region above a matrix diagonal with independent
+complex Gaussian entries of variance $1/N$, and put zeros elsewhere:
+\[
+ \mathsf T_N=
+ \begin{pmatrix}
+ 0& *& *&\cdots& *\\
+ 0& 0& *&\cdots& *\\
+ \vdots&\vdots&\ddots&\ddots&\vdots\\
+ 0&0&\cdots&0&*\\
+ 0&0&\cdots&0&0
+ \end{pmatrix}.
+\]
+All eigenvalues of this triangular matrix are zero.
+Its singular values still measure how strongly it stretches vectors.
+Their squares are the eigenvalues of $\mathsf T_N^*\mathsf T_N$;
+these have a nontrivial limiting histogram.
+
+That histogram is the Dykema--Haagerup law
+$\operatorname{DH}_1$, supported on $[0,e]$
+\cite{triDykemaHaagerup,triCheliotis}.
+Its moments are
+\[
+ \int y^k\,d\operatorname{DH}_1(y)=\frac{k^k}{(k+1)!}
+ \qquad(k=1,2,\ldots),
+\]
+so its mean is $1/2$.
+No triangular matrices occur in the definition of $J_N$.
+Nevertheless its roots reproduce this same law.
+
+\begin{theorem}[The triangular spectrum]\label{tri:main}
+Write $-R_{N,1},\ldots,-R_{N,N}$ for the roots of $J_N$,
+with multiplicity. Center their positive magnitudes by setting
+\[
+ t_{N,j}=e^{-\gamma}R_{N,j}-\log N-\log\log N.
+\]
+Then
+\begin{equation}\label{tri:exp}
+ \boxed{\frac1N\sum_{j=1}^N
+ \delta_{\exp(t_{N,j})}
+ \Longrightarrow\operatorname{DH}_1.}
+\end{equation}
+Equivalently, if $T$ is the logarithm of a random variable with law
+$\operatorname{DH}_1$, then
+\begin{equation}\label{tri:centered}
+ \frac1N\sum_{j=1}^N
+ \delta_{t_{N,j}}
+ \Longrightarrow\mathcal L(T).
+\end{equation}
+The law of $T$ has support $(-\infty,1]$; its explicit density is
+given in \eqref{tri:density}.
+\end{theorem}
+
+Here is a practical reading of the theorem.
+List the positive magnitudes of the arithmetic roots.
+Multiply them by $e^{-\gamma}$, subtract
+$\log N+\log\log N$, and make a histogram.
+The result approaches a fixed asymmetric shape.
+Exponentiate the centered entries, and the shape becomes the
+squared-singular-value histogram of triangular Gaussian noise.
+
+The common centering matters.
+Dividing by $\log N$ erases fluctuations on a constant scale;
+subtracting both $\log N$ and $\log\log N$ exposes them.
+The extra $\log\log N$ is part of the arithmetic calculation.
+
+\paragraph{Where the bridge comes from.}
+The proof has three steps, all supplied in Appendix~\ref{triapp:all}.
+First form the entire function
+\[
+ \mathcal E(z)=\sum_{k\ge0}K(k)\frac{z^k}{k!}.
+\]
+Its zeros are negative.  If their magnitudes are $\rho_j$, the prime
+number theorem leads to the counting law
+\[
+ \#\{j:\rho_j\le r\}\sim e^{-\gamma}\frac r{\log^2r}.
+\]
+Second, Campbell and Jalowy's transfer theorem
+\cite[Corollary 2.3]{finCampbellJalowy} turns this growth of the
+entire function's zeros into a limiting law for the polynomial roots.
+Finally, the precise arithmetic centering identifies that law as the
+logarithm of $\operatorname{DH}_1$, using the identification of
+Arizmendi and Hasebe \cite[Proposition 4.4]{triArizmendiHasebe}.
+
+The connection therefore has a definite route:
+coprimality probabilities determine an entire function;
+its supply of zeros determines a free-stable law;
+exponentiating that law gives the triangular spectrum.
+The external transfer theorem supplies the bridge.
+The prime estimates determine which law and which scale cross it.
+
+The histogram alone does not locate the largest arithmetic root.
+Question~\ref{tri:edgequestion} asks whether it also reaches the edge
+of the triangular spectrum.

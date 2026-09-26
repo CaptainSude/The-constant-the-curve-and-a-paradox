@@ -1,0 +1,132 @@
+\section{Proof of the primitive sampling theorem}
+\label{samp:proofs}
+
+This appendix proves Theorem~\ref{samp:staircase}.  The main text gave
+its probabilistic mechanism; here we justify the limiting distribution,
+the exact Lebesgue decomposition, and the dimension statement.
+
+\begin{proof}
+We first obtain the limiting probability model.  Take a pair of
+Haar-uniform profinite integers $(U,V)$, conditioned on having no
+common prime divisor.  This event has probability
+$\prod_p(1-p^{-2})=6/\pi^2$.  At each prime $p$, the residues $(U,V)$
+are therefore uniform among the $p^2-1$ pairs other than $(0,0)$;
+these choices are independent at distinct primes.  Independently
+choose fair bits $B_0,B_1,\ldots$.  The candidate limit is the law of
+\begin{equation}
+ Z_g=\sum_{j\ge0}\bigl(1-h_g(U+jV)\bigr)B_j2^{-j-1}.
+ \label{samp:model}
+\end{equation}
+The least prime of each $U+jV$ exists almost surely.  For example,
+under this local law
+$\Prob(p\mid U+jV)=1/(p+1)$, and independence over primes shows
+that the probability of avoiding every prime is zero.
+
+For completeness, the analytic input that produces the fair bits
+is the following variable-step cancellation: for any nonempty finite
+$J\subset\{0,1,\ldots\}$ and any fixed function $P(a,d)$ periodic
+in both variables,
+\begin{equation}
+ \frac1{N^2}\sum_{a,d\le N}P(a,d)
+       \prod_{j\in J}\lambda(a+jd)\longrightarrow0.
+ \label{samp:cancellation}
+\end{equation}
+Theorem~2.5 of Frantzikinakis--Host \cite{sampFrantzikinakisHost2017}
+gives vanishing Gowers norms of every fixed order for the aperiodic
+function $\lambda$; their Lemma~9.6 controls products on independent
+linear forms.  To include $P$, expand it in its finite Fourier
+series.  For $j_0\in J$ a phase $e((ra+sd)/Q)$ factors as
+$e(r(a+j_0d)/Q)e((s-rj_0)d/Q)$, where $e(t)=e^{2\pi it}$.
+Absorb the first factor into $\lambda(a+j_0d)$ and the second into
+the additional form $d$.  Multiplication by a linear phase preserves
+Gowers norms of order at least two.  Extend the first function evenly
+from positive integers, as required by that lemma.  The forms
+$a+jd$ and $d$ are pairwise independent, proving
+\eqref{samp:cancellation}.  Thus no assertion about correlations
+at a fixed step is being used.
+
+Fix a prefix length $k$.  Truncate both the mask and the coprimality
+condition at primes at most $R$.  All mask coefficients and
+restrictions are now periodic in $(a,d)$.  Expand a prefix indicator
+using $1-2x_g=h_g+(1-h_g)\lambda$.  Every term containing a
+Liouville factor vanishes by \eqref{samp:cancellation}; the other
+terms converge by the Chinese remainder theorem.  These are exactly
+the prefix probabilities in \eqref{samp:model}, with the same
+truncations.  The proportion of pairs missed by truncated
+coprimality is at most $\sum_{p>R}p^{-2}$, since
+$\lfloor N/p\rfloor^2\le N^2/p^2$.  A mask error at $a+jd$
+requires that integer to avoid all primes at most $R$.  For fixed
+$R$, its limiting proportion in the square is
+$\prod_{p\le R}(1-1/p)$, which tends to zero.  Summing this error
+over the $k$ positions and then removing both truncations proves
+prefix convergence.  A continuous function of the sampled real is
+uniformly approximated by a function of its first $k$ digits, since
+the remaining binary tail is at most $2^{-k}$.  This proves weak
+convergence to the law of $Z_g$.
+
+Next fix a primitive profinite pair $(U,V)$.  A lane $p$ is visited
+by $U+jV$, $j\ge0$, if and only if $p\nmid V$.  If $p\mid V$,
+primitivity gives $p\nmid U$, so the lane is avoided.  Otherwise
+prescribe the unique root modulo $p$ and avoid the roots modulo
+each smaller prime $q$ with $q\nmid V$.  There is an allowed residue
+at each such $q$; primes dividing $V$ already divide no term.
+The Chinese remainder theorem gives an index with least prime $p$,
+and the same event repeats periodically in $j$.
+
+All digits of the progression are open precisely when $p\mid V$
+for every $p\in\mathcal F$.  Locally this has probability
+$(p-1)/(p^2-1)=1/(p+1)$, proving that the all-open event has
+probability $L_g$.  On it, $Z_g$ is uniform on $[0,1]$.
+An all-closed progression would require $p\mid V$ for every
+successful prime.  There are infinitely many such primes by
+\eqref{samp:success-hypothesis}, so that event has probability zero.
+Almost every fiber therefore has an open lane, hence infinitely many
+independent fair bits.  Its binary law is nonatomic, and so is its
+image on $[0,1]$.
+
+If a fiber has any closed position, that position repeats along an
+infinite arithmetic progression of indices.  All the corresponding
+bits are forced to zero.  The set of binary sequences with zeros on
+some infinite arithmetic progression is a countable union of
+fair-coin null sets.  Its image has Lebesgue measure zero.  Every
+fiber with a closed position is carried by this same null set.
+This common support, together with non-atomicity, proves the exact
+decomposition \eqref{samp:decomposition}.
+
+To prove full support, choose any $k$ distinct successful primes
+$s_0,\ldots,s_{k-1}$, and take $R>\max s_j$.  At disabled primes
+$q\le R$ impose $V=0$, $U\ne0$ modulo $q$.  At successful primes
+$q\le R$ impose $V\ne0$; at $s_j$ also impose $U+jV=0$.
+These compatible local conditions have positive probability.
+They make each of the first $k$ positions open: it has a successful
+prime divisor below $R$ and no disabled divisor there.
+The independent fair bits can then realize any prescribed word.
+Every dyadic interval has positive mass.
+
+Finally, impose the same conditions below $R$, without prescribing
+the first $k$ positions.  Call this positive-probability event $D_R$.
+For any fixed local residues on $D_R$, every closed index belongs to
+the periodic set avoiding the single roots at all successful
+primes $q\le R$.  This set has density
+\[
+ \varepsilon_R=\prod_{\substack{q\le R\\q\notin\mathcal F}}(1-1/q).
+\]
+With $Q_R=\prod_{q\le R}q$, at least
+$(1-\varepsilon_R)n-Q_R$ of the first $n$ bits are consequently
+open.  The submeasure
+$\mu_R(B)=\Prob(Z_g\in B,\ D_R)$ satisfies, for every dyadic
+interval $I$ of length $2^{-n}$,
+\[
+ \mu_R(I)\le 2^{Q_R}2^{-(1-\varepsilon_R)n}.
+\]
+The same bound with a different constant holds for arbitrary
+intervals, by covering one interval with at most two dyadic
+intervals of comparable length.  Any full-$\nu_g$-measure Borel
+set has positive $\mu_R$ mass.  Covering it by intervals and summing
+this bound shows that its Hausdorff dimension is at least
+$1-\varepsilon_R$.  Hypothesis \eqref{samp:success-hypothesis}
+gives $\varepsilon_R\to0$, proving dimension one.  A nonatomic
+full-support probability has a continuous strictly increasing
+distribution function; differentiation of its Lebesgue
+decomposition gives the final assertion.
+\end{proof}

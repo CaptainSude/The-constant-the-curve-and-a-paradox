@@ -1,0 +1,142 @@
+% Compile with LuaLaTeX, Biber, then LuaLaTeX twice.
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=27mm,headheight=15pt,headsep=7mm]{geometry}
+\usepackage{fontspec}
+\setmainfont{STIXTwoText}[
+ Path=fonts/,Extension=.ttf,UprightFont=*-Regular,ItalicFont=*-Italic,
+ BoldFont=*-Bold,BoldItalicFont=*-BoldItalic]
+\usepackage{amsmath,amsthm,mathtools}
+\usepackage{unicode-math}
+\setmathfont{STIXTwoMath-Regular.otf}[Path=fonts/]
+\usepackage{microtype}
+\usepackage{xcolor,graphicx,booktabs,array,longtable}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage{needspace}
+\usepackage{etoolbox}
+\usepackage{csquotes}
+\definecolor{ink}{HTML}{202A34}
+\definecolor{teal}{HTML}{167B80}
+\definecolor{rust}{HTML}{B35732}
+\usepackage[
+ backend=biber,style=numeric,sorting=nyt,giveninits=true,
+ maxbibnames=8,doi=true,url=true,isbn=false,eprint=true
+]{biblatex}
+\addbibresource{references.bib}
+\usepackage[colorlinks=true,linkcolor=teal,citecolor=teal,urlcolor=teal,
+ pdftitle={The constant, the curve and a paradox},
+ pdfauthor={Sol, Astra and Captain Sude},
+ pdfsubject={Arithmetic information in digits, probability and graphs},
+ bookmarksnumbered=true]{hyperref}
+\usepackage{bookmark}
+\linespread{1.08}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{1em}
+\setlength{\emergencystretch}{2em}
+\setlength{\textfloatsep}{16pt plus 3pt minus 3pt}
+\captionsetup{font=small,labelfont=bf,justification=justified}
+\setlist{itemsep=3pt,topsep=5pt}
+\setcounter{tocdepth}{1}
+\numberwithin{equation}{section}
+\newtheoremstyle{readable}{10pt}{8pt}{\normalfont}{}{\bfseries}{.}{.6em}{}
+\theoremstyle{readable}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Prob}{\mathbb P}
+\newcommand{\Gold}{\mathcal G}
+\newcommand{\Comp}{W_{\mathrm c}}
+\newcommand{\CompN}{W_{\mathrm c,N}}
+\newcommand{\SymCDF}{F_{\mathrm{sym}}}
+\newcommand{\GC}{\mathrm{Goldbach}}
+\newcommand{\RH}{\mathrm{RH}}
+\DeclareMathOperator{\lpf}{lpf}
+\DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\TV}{TV}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\tr}{tr}
+\newcommand{\ind}{\mathbf 1}
+\newcommand{\dd}{\,d}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\itshape The constant, the curve and a paradox}
+\fancyhead[R]{\small Sol, Astra and Captain Sude}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+\AtBeginEnvironment{theorem}{\Needspace{5\baselineskip}}
+\AtBeginEnvironment{proposition}{\Needspace{5\baselineskip}}
+\AtBeginEnvironment{lemma}{\Needspace{5\baselineskip}}
+\AtBeginEnvironment{corollary}{\Needspace{5\baselineskip}}
+\title{\LARGE The constant, the curve\\[3pt] and a paradox\\[9pt]
+ \large Arithmetic information in digits, probability and graphs}
+\author{Sol \and Astra \and Captain Sude}
+\date{\small 25 September 2026}
+\begin{document}
+\color{ink}
+\pagenumbering{roman}
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+\vspace*{34mm}
+{\fontsize{30}{36}\selectfont
+The constant, the curve\\[4pt]and a paradox\par}
+\vspace{10mm}
+{\large Arithmetic information in digits, probability and graphs\par}
+\vspace{24mm}
+{\large Sol \qquad Astra \qquad Captain Sude\par}
+\vfill
+{\small 25 September 2026\par}
+\end{titlepage}
+\setcounter{page}{2}
+\begingroup
+\small
+\setlength{\parskip}{0pt}
+\linespread{1}\selectfont
+\makeatletter
+\patchcmd{\l@section}{1.0em}{0.65em}{}{}
+\makeatother
+\tableofcontents
+\endgroup
+\clearpage
+\begingroup
+\small
+\input{sections/notation}
+\endgroup
+\clearpage
+\pagenumbering{arabic}
+\input{sections/foundations}
+\input{sections/conjectures}
+\input{sections/recovery}
+\input{sections/finale}
+\input{sections/playground}
+\clearpage
+\input{sections/open_questions}
+\clearpage
+\input{sections/closing}
+\clearpage
+\appendix
+\small
+\input{sections/foundations_proofs}
+\input{sections/sampling_proofs}
+\IfFileExists{sections/phi_growth_proofs.tex}{\input{sections/phi_growth_proofs}}{}
+\input{sections/criteria_proofs}
+\input{sections/recovery_proofs}
+\input{sections/finale_proofs}
+\IfFileExists{sections/triangular_proofs.tex}{\input{sections/triangular_proofs}}{}
+\input{sections/certificate}
+\clearpage
+\printbibliography[heading=bibintoc,title={References}]
+\end{document}

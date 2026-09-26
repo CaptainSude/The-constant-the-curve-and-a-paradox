@@ -1,0 +1,89 @@
+\section{A finite certificate for an infinite matrix}\label{cq:certificate}
+
+This appendix specifies the rational calculation cited after
+Theorem~\ref{cq:twins}. The accompanying file
+\texttt{code/verify\_twin\_certificate.py} uses integer and rational
+arithmetic for every decisive comparison. Its decimal output is only
+a readable summary.
+
+Let \(Y=100\), and write
+\[
+ A_Y(z)=\prod_{2<p\leq Y}\frac{1-z/(p+3)}{1-z/p}
+       =\sum_{n\geq0}\alpha_nz^n,\qquad
+ \frac{F(1-z)}{F(1)}=A_Y(z)B_Y(z).
+\]
+The tail estimate in the main text gives
+\[
+ B_Y(z)=\exp\left(\sum_{k\geq1}\frac{\epsilon_kz^k}{k}\right)
+       =\sum_{m\geq0}\beta_mz^m,\qquad
+ 0\leq\epsilon_k\leq3Y^{-k}.
+\]
+Coefficient comparison with \((1-z/Y)^{-3}\) yields
+\begin{equation}\label{cq:betabound}
+      \beta_0=1,\qquad 0\leq\beta_m\leq\binom{m+2}{2}Y^{-m}.
+\end{equation}
+Keeping one common sequence \((\beta_m)\) preserves the dependence between
+the matrix entries; independent intervals for the entries would throw away
+useful structure.
+
+Put \(S=\{3,5,7,11,13,17,19,23\}\) and \(T=\{5,7,13,19\}\). For \(p\in T\)
+define the degree-fourteen polynomial
+\[
+ P_p(u)=
+ \frac{u^7\prod_{q\in S\setminus\{p\}}(u-1/q)}
+      {p^{-7}\prod_{q\in S\setminus\{p\}}(1/p-1/q)}.
+\]
+It has rational coefficients and satisfies
+\(P_p(1/q)=\mathbf1_{\{p=q\}}\) for \(q\in T\).
+Let \(P_i(u)=\sum_r a_{i,r}u^r\), and form
+\[
+ (Q_m)_{ij}=\sum_{r,s}a_{i,r}a_{j,s}\alpha_{r+s+2-m},
+ \qquad \alpha_n=0\quad(n<0).
+\]
+The actual infinite moment form on these four coefficient vectors is
+\[
+                         \sum_{m=0}^{30}\beta_m Q_m.
+\]
+All \(\alpha_n\) through degree \(30\) are obtained from the rational
+recursion
+\[
+ \alpha_0=1,\qquad
+ \alpha_n=\frac1n\sum_{k=1}^n
+ \left(\sum_{2<p\leq100}\{p^{-k}-(p+3)^{-k}\}\right)\alpha_{n-k}.
+\]
+Thus the certificate has no unspecified numerical inputs.
+
+Exact symmetric elimination verifies that \(Q_0\) is negative definite.
+Rational Gram--Schmidt changes the four polynomials to a basis in which
+\(Q_0=-\operatorname{diag}(a_1,a_2,a_3,a_4)\), all \(a_i>0\).
+In this basis, exact elimination also verifies that \(Q_1,Q_2\) are
+negative definite. Define
+\[
+ E_{ij}=\sum_{m=3}^{30}\binom{m+2}{2}100^{-m}|(Q_m)_{ij}|.
+\]
+The four exact comparisons checked by the program are
+\begin{equation}\label{cq:rowcertificate}
+                    7\sum_jE_{ij}<a_i\qquad(1\leq i\leq4).
+\end{equation}
+For orientation, the four ratios \(\sum_jE_{ij}/a_i\), rounded only for
+display, are
+\[
+        0.001350780,\quad0.003829068,\quad
+        0.027644920,\quad0.140852054 .
+\]
+
+For any nonzero real vector \(v\), use \eqref{cq:betabound}, discard the
+two negative tail contributions, and apply
+\(2|v_i v_j|\leq v_i^2+v_j^2\). The result is
+\[
+ v^{\mathsf T}\left(\sum_{m=0}^{30}\beta_mQ_m\right)v
+ \leq-\sum_i\left(a_i-\sum_jE_{ij}\right)v_i^2
+ <-\frac67\sum_i a_i v_i^2<0 .
+\]
+The four polynomials are independent by their interpolation values.
+Hence they certify four negative directions in the infinite matrix.
+
+The certificate's witnesses use the already known twin upper endpoints
+\(5,7,13,19\). Its purpose is to show how a statement about infinitely
+many uncomputed primes can be certified by finite exact inequalities.
+It makes no claim to discover a new twin pair.

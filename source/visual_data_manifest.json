@@ -1,0 +1,75 @@
+{
+  "title": "The constant, the curve and a paradox",
+  "font_release": "STIX Two v2.13b171",
+  "font_source": "https://github.com/stipub/stixfonts/tree/v2.13b171",
+  "density_illustration": {
+    "method": "conditional Monte Carlo for finite-prime product",
+    "seed": 271828,
+    "samples": 180000,
+    "prime_cutoff": 2000,
+    "number_of_primes": 303,
+    "estimated_f_zero": 0.7558474240469806,
+    "finite_product_C2": 0.6602003339344003,
+    "warning": "Plot is an explicitly labelled finite-prime Monte Carlo preview; no certified approximation error or proof by plot is claimed."
+  },
+  "finite_examples": {
+    "divisor_max": 48,
+    "artificial_blocked_prime": 7,
+    "delete7_max_prime": 127,
+    "shown_prime_count": 30,
+    "last_round_computed": 8
+  },
+  "files": {
+    "OFL.txt": "0c8825913b60d858aacdb33c4ca6660a7d64b0d6464702efbb19313f5765861a",
+    "STIXTwoMath-Regular.otf": "3a5f3f26f40d5698b3c62dd085d48d6663696a3f80825aab8b553d5097518e8c",
+    "STIXTwoMath-Regular.ttf": "49b22767985171bce579307b21d98f4d35012fa39e316acc4ffcab8644dfb69b",
+    "STIXTwoText-Bold.ttf": "89adbb9907c40465e061f084598dbebd5a802e30c6e2d38612205b9c87281cae",
+    "STIXTwoText-BoldItalic.ttf": "f11eced04bcd8919ad92ccc0251878be9a46fa45fa76c514e3abfbf605a3160f",
+    "STIXTwoText-Italic.ttf": "5a0ed1c0c1d3d4f83f2d00bcd4a0a991a7b0755beacee0a57b26762327a84c22",
+    "STIXTwoText-Regular.ttf": "0566a1be411c0b2463fad8563b33f1c299442b8882c7fce9ef95e079f43233da"
+  },
+  "figure_order": [
+    "01_digits_and_divisors",
+    "05_two_averages",
+    "02_prime_density",
+    "04_locked_boxes",
+    "03_delete_seven"
+  ],
+  "two_averages": {
+    "disabled_primes": [
+      3,
+      5
+    ],
+    "exact_conditioned_coefficients": [
+      "1",
+      "7/30",
+      "1/72"
+    ],
+    "exact_unconditioned_coefficients": [
+      "1",
+      "7/30",
+      "1/(12*pi^2)"
+    ],
+    "scope": "Exact coefficient formulas; plotted root coordinates are numerical",
+    "data": "figures/two_average_roots.json"
+  },
+  "deletion_clock": {
+    "cutoff": 1000000,
+    "calculation": "Exact sieve and backward recurrence",
+    "script": "code/compute_deletion_times.py",
+    "scope": "Finite counts are distinct from the proved asymptotic clock law"
+  },
+  "midpoint_roots": {
+    "Euler_cutoffs": [
+      2000,
+      8000,
+      32000
+    ],
+    "Taylor_prime_cutoff": 251,
+    "precision_decimal_digits": 55,
+    "check_Taylor_cutoff": 149,
+    "script": "code/estimate_midpoint_roots.py",
+    "scope": "Uncertified finite approximations; no Euler-product remainder or contour bound"
+  },
+  "edition": "Final version"
+}
